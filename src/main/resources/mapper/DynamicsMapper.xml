@@ -48,6 +48,12 @@
     from dynamics
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectDynamicsNum" resultType="com.netease.miniadmin.dto.CountResult">
+    select
+    open_id as field, count(*) as num
+    from dynamics
+    group by open_id
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
