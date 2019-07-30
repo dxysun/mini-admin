@@ -2,7 +2,9 @@ package com.netease.miniadmin;
 
 
 import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.model.GroupRelation;
 import com.netease.miniadmin.service.ConditionTagService;
+import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.RequirementTagService;
 import com.netease.miniadmin.service.TagService;
 import org.junit.Test;
@@ -28,10 +30,11 @@ public class MiniAdminApplicationTests {
     RequirementTagService requirementTagService;
     @Autowired
     ConditionTagService conditionTagService;
-
+    @Autowired
+    GroupRelationService groupRelationService;
     @Test
     public void contextLoads() {
-        List<CountResult> list = conditionTagService.selectEveryConditionTagCount();
+        List<CountResult> list = groupRelationService.getGroupNum();
         for(CountResult result:list){
            // System.out.println(result);
            System.out.println(result.getField()+":"+result.getNum());
