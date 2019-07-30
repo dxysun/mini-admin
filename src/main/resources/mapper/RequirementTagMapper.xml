@@ -14,6 +14,8 @@
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
     <result column="necessary" property="necessary" jdbcType="INTEGER" />
   </resultMap>
+
+
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
@@ -146,4 +148,8 @@
       necessary = #{necessary,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectEveryRequireTagCount" resultType="com.netease.miniadmin.dto.CountResult">
+    select require_tag_name as field,count(*) as num from requirement_tag group by require_tag_name
+  </select>
 </mapper>
