@@ -56,6 +56,14 @@
   <select id="getUserCount" resultType="int">
     select count(*) from user
   </select>
+
+  <select id="selectByCity" resultType="Integer">
+    select count(*) from user where city= #{city}
+  </select>
+  <select id="selectAllCitys" resultType="java.util.Map">
+    SELECT city, COUNT(*) as number FROM user GROUP BY city
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.netease.miniadmin.model.UserKey" >
     <!--
       WARNING - @mbggenerated

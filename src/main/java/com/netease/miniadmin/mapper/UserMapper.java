@@ -3,8 +3,12 @@ package com.netease.miniadmin.mapper;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserKey;
 import com.netease.miniadmin.model.UserWithBLOBs;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 @Component
 public interface UserMapper {
@@ -64,5 +68,11 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
 
+    // 获取总用户数
     int getUserCount();
+
+    /* 根据地点获取用户数 */
+    int selectByCity(@Param("city")String city);
+
+    List<Map<String,Integer>> selectAllCitys();
 }
