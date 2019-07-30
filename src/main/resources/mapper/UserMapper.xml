@@ -60,8 +60,20 @@
   <select id="selectByCity" resultType="Integer">
     select count(*) from user where city= #{city}
   </select>
-  <select id="selectAllCitys" resultType="java.util.Map">
-    SELECT city, COUNT(*) as number FROM user GROUP BY city
+  <select id="selectAllCitys" resultType="com.netease.miniadmin.dto.CountResult">
+    SELECT city as field, count(*) as num FROM user GROUP BY city
+  </select>
+
+  <select id="selectAllages" resultType="com.netease.miniadmin.dto.CountResult">
+    select age as field, count(*) as num FROM user GROUP BY age
+  </select>
+
+  <select id="selectAllGenders" resultType="com.netease.miniadmin.dto.CountResult">
+    select gender as field, count(*) as num from user GROUP BY gender
+  </select>
+
+  <select id="selectWorkStatus" resultType="com.netease.miniadmin.dto.CountResult">
+    select work_status as field,count(*) as num from user GROUP BY work_status
   </select>
 
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.netease.miniadmin.model.UserKey" >

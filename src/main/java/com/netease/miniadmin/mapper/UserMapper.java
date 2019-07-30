@@ -1,5 +1,6 @@
 package com.netease.miniadmin.mapper;
 
+import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserKey;
 import com.netease.miniadmin.model.UserWithBLOBs;
@@ -74,5 +75,16 @@ public interface UserMapper {
     /* 根据地点获取用户数 */
     int selectByCity(@Param("city")String city);
 
-    List<Map<String,Integer>> selectAllCitys();
+    List<CountResult> selectAllCitys();
+
+    List<CountResult> selectAllages();
+
+    List<CountResult> selectAllGenders();
+
+    List<CountResult> selectWorkStatus();
+
+
+
+
+
 }

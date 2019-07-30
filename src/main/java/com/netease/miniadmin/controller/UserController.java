@@ -1,5 +1,6 @@
 package com.netease.miniadmin.controller;
 
+import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +33,14 @@ public class UserController {
        return num;
    }
 
+
+
     @GetMapping("/getAllCitys")
     public Integer getAllCitys()
     {
         Map<String,Integer> map =new HashMap<>();
-        List<Map<String,Integer>> list =new ArrayList<>();
+        List<CountResult> list =new ArrayList<>();
         list=userService.selectAllCitys();
-        for(Map<String, Integer> l:list)
-        {
-
-        }
         return 1;
     }
 }
