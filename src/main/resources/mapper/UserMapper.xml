@@ -53,6 +53,9 @@
     -->
     avatar_url, upload_avatar_url
   </sql>
+  <select id="getUserCount" resultType="int">
+    select count(*) from user
+  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.netease.miniadmin.model.UserKey" >
     <!--
       WARNING - @mbggenerated
