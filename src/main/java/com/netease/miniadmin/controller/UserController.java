@@ -1,6 +1,7 @@
 package com.netease.miniadmin.controller;
 
 import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,5 +92,7 @@ public class UserController {
     {
         return "welcome";
     }
+
+
 
 }
