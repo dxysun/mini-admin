@@ -33,6 +33,11 @@ public class UserController {
        return map;
    }
 
+    /**
+     * 用于返回每个用户动态数目的接口
+     * @author Xiang Jiangnan
+     * @return
+     */
    @RequestMapping("/getDynamicsNum")
     public List<CountResult> getDynamicsNum(){
        List<CountResult> list = dynamicService.getDynamicsNum();
@@ -51,11 +56,24 @@ public class UserController {
    }
 
     @GetMapping("/getAllCitys")
-    public Integer getAllCitys()
-    {
-        Map<String,Integer> map =new HashMap<>();
-        List<CountResult> list =new ArrayList<>();
-        list=userService.selectAllCitys();
+    public Integer getAllCitys() {
+        Map<String, Integer> map = new HashMap<>();
+        List<CountResult> list = new ArrayList<>();
+        list = userService.selectAllCitys();
         return 1;
+    }
+
+    /**
+     * 用于返回日记区间的用户分布
+     * @author Xiang Jiangnan
+     * @return
+     */
+    @RequestMapping("/getDynamicDistribute")
+    public List<Integer> getDynamicDistribute(){
+        List<Integer> arrayList = dynamicService.getDynamicDistribute();
+        if(!CollectionUtils.isEmpty(arrayList)){
+            return arrayList;
+        }
+        return null;
     }
 }
