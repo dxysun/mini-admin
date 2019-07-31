@@ -3,10 +3,7 @@ package com.netease.miniadmin;
 
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.model.GroupRelation;
-import com.netease.miniadmin.service.ConditionTagService;
-import com.netease.miniadmin.service.GroupRelationService;
-import com.netease.miniadmin.service.RequirementTagService;
-import com.netease.miniadmin.service.TagService;
+import com.netease.miniadmin.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +29,16 @@ public class MiniAdminApplicationTests {
     ConditionTagService conditionTagService;
     @Autowired
     GroupRelationService groupRelationService;
+    @Autowired
+    UserService userService;
+
     @Test
     public void contextLoads() {
-        List<CountResult> list = groupRelationService.getGroupNum();
-        for(CountResult result:list){
-           // System.out.println(result);
-           System.out.println(result.getField()+":"+result.getNum());
+        List<CountResult> list = userService.selectWorkStatusRatio();
+        for (CountResult result : list) {
+            // System.out.println(result);
+            System.out.println(result.getField() + ":" + result.getNum());
         }
 
-}}
+    }
+}

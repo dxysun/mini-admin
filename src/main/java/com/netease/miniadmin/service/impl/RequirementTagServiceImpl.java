@@ -11,6 +11,11 @@ import java.util.List;
 public class RequirementTagServiceImpl implements RequirementTagService {
     @Autowired
     private RequirementTagMapper requirementTagMapper;
+
+    /**
+     * 返回每一个需求标签选择的人数
+     * @return
+     */
     @Override
     public List<CountResult> selectEveryRequireTagCount() {
         return requirementTagMapper.selectEveryRequireTagCount();
