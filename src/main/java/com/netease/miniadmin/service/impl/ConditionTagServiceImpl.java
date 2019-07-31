@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ConditionTagServiceImpl implements ConditionTagService {
     @Autowired
     private ConditionTagMapper conditionTagMapper;
+
+    /**
+     * 返回每一个条件标签选择的人数
+     * @return
+     */
     @Override
     public List<CountResult> selectEveryConditionTagCount() {
         return conditionTagMapper.selectEveryConditionTagCount();

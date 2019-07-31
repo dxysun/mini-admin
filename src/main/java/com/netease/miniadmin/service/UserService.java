@@ -24,5 +24,8 @@ public interface UserService {
 
     List<CountResult> selectWorkStatus();
 
+    List<CountResult> selectGenderRatio();
+
+    List<CountResult> selectWorkStatusRatio();
 
 }
