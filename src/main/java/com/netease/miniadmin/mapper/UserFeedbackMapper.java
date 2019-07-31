@@ -1,6 +1,9 @@
 package com.netease.miniadmin.mapper;
 
+import com.netease.miniadmin.model.PageQuery;
 import com.netease.miniadmin.model.UserFeedback;
+
+import java.util.List;
 
 public interface UserFeedbackMapper {
     /**
@@ -58,4 +61,10 @@ public interface UserFeedbackMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(UserFeedback record);
+
+    /**
+     * 分页查询
+     * @return
+     */
+    List<UserFeedback> pageQuery(PageQuery pageQuery);
 }
