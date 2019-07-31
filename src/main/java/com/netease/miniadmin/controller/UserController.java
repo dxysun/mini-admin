@@ -79,7 +79,16 @@ public class UserController {
         }
         return null;
     }
-
+    @RequestMapping("/getAllUserInfo")
+    public ModelAndView getAllUserInfo(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<User> userList = userService.getAllUsers();
+        Integer userNum = userService.getUserCount();
+        modelAndView.addObject("userList",userList);
+        modelAndView.addObject("userNum",userNum);
+        modelAndView.setViewName("admin/list");
+        return modelAndView;
+    }
 
     @GetMapping("/index")
     public String getddd()

@@ -1,6 +1,7 @@
 package com.netease.miniadmin.service;
 
 import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.model.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,5 +28,7 @@ public interface UserService {
     List<CountResult> selectGenderRatio();
 
     List<CountResult> selectWorkStatusRatio();
+
+    List<User> getAllUsers();
 
 }

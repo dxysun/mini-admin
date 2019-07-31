@@ -2,6 +2,7 @@ package com.netease.miniadmin.service.impl;
 
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.mapper.UserMapper;
+import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -175,5 +176,10 @@ public class UserServiceImpl implements UserService {
         resultList.add(worker);
         resultList.add(student);
         return resultList;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userMapper.selectAllUser();
     }
 }

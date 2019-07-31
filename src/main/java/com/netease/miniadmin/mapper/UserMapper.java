@@ -83,7 +83,7 @@ public interface UserMapper {
 
     List<CountResult> selectWorkStatus();
 
-
+    List<User> selectAllUser();
 
 
 
