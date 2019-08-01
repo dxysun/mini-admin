@@ -71,28 +71,31 @@ public class UserController {
         return 1;
     }
 
+    @GetMapping(value = "/dynamicDistributeBar")
+    public String dynamicDistributeBar()
+    {
+        return "/echarts/dynamicbar";
+    }
+
     /**
      * 用于返回日记区间的用户分布
      * @author Xiang Jiangnan
      * @return
      */
     @RequestMapping("/getDynamicDistribute")
-    public List<Integer> getDynamicDistribute(){
-        List<Integer> arrayList = dynamicService.getDynamicDistribute();
-        if(!CollectionUtils.isEmpty(arrayList)){
-            return arrayList;
-        }
-        return null;
+    @ResponseBody
+    public String getDynamicDistribute(){
+        List<EchartResult> list = dynamicService.getDynamicDistribute();
+        String data = JSON.toJSONString(list);
+        return data;
     }
+
     @RequestMapping("/getAllUserInfo")
     public ModelAndView getAllUserInfo(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize){
         PageHelper .startPage(pageNo,pageSize);
         ModelAndView modelAndView = new ModelAndView();
-//        List<User> userList = userService.getAllUsers();
-//        Integer userNum = userService.getUserCount();
         PageInfo<User> pageInfo = new PageInfo<>(userService.getAllUsers());
         modelAndView.addObject("userList",pageInfo);
-//        modelAndView.addObject("userNum",userNum);
         modelAndView.setViewName("admin/list");
         return modelAndView;
     }

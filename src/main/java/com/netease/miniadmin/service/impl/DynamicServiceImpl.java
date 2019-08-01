@@ -2,6 +2,7 @@ package com.netease.miniadmin.service.impl;
 
 import com.netease.miniadmin.common.Constant;
 import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.EchartResult;
 import com.netease.miniadmin.mapper.DynamicsMapper;
 import com.netease.miniadmin.service.DynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用于处理用户动态日记的接口
@@ -42,26 +41,30 @@ import java.util.Map;
      * @return 返回不同日记区间的用户数的集合
      */
     @Override
-    public List<Integer> getDynamicDistribute(){
+    public List<EchartResult> getDynamicDistribute(){
         List<CountResult> list = getDynamicsNum();
-        ArrayList<Integer> arrayList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
+        ArrayList<Integer> countList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
+        ArrayList<EchartResult> arrayList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
         for(int i = 0; i < Constant.DynamicDistribute.DYNAMICSECTIONNUM; i++){
-            arrayList.add(0);
+            countList.add(0);
         }
         if(!CollectionUtils.isEmpty(list)){
             for(CountResult result: list){
                 int num = result.getNum();
                 if(num <= Constant.DynamicDistribute.DYNAMICNUMPOINT1){
-                    arrayList.set(0, arrayList.get(0)+ 1);
+                    countList.set(0, countList.get(0) + 1);
                 }else if(num <= Constant.DynamicDistribute.DYNAMICNUMPOINT2){
-                    arrayList.set(1, arrayList.get(1)+ 1);
+                    countList.set(1, countList.get(1) + 1);
                 }else if(num <= Constant.DynamicDistribute.DYNAMICNUMPOINT3){
-                    arrayList.set(2, arrayList.get(2)+ 1);
+                    countList.set(2, countList.get(2) + 1);
                 }else if(num <= Constant.DynamicDistribute.DYNAMICNUMPOINT4){
-                    arrayList.set(3, arrayList.get(3)+ 1);
+                    countList.set(3, countList.get(3) + 1);
                 }else{
-                    arrayList.set(4, arrayList.get(4)+ 1);
+                    countList.set(4, countList.get(4) + 1);
                 }
+            }
+            for(int i = 0; i < countList.size(); i++){
+                arrayList.add(new EchartResult(Constant.DynamicDistribute.getDynamicSection(i), countList.get(i)));
             }
             return arrayList;
         }
