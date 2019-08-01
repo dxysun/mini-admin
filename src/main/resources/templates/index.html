@@ -11,8 +11,6 @@
 	<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
 	<link rel="stylesheet" th:href="@{/css/font.css}"/>
 	<link rel="stylesheet" th:href="@{/css/weadmin.css}"/>
-<!--	<link rel="stylesheet" href="/css/font.css">-->
-<!--	<link rel="stylesheet" href="/mini-love-admin/css/weadmin.css">-->
 	<script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
 
 </head>
@@ -58,7 +56,7 @@
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
-				<iframe src='/admin/user/wel' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+				<iframe th:src='@{/admin/user/wel}' frameborder="0" scrolling="yes" class="weIframe"></iframe>
 			</div>
 		</div>
 	</div>
