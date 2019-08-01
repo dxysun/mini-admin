@@ -145,10 +145,14 @@ public class UserServiceImpl implements UserService {
     public List<CountResult> selectWorkStatus() {
         List<CountResult> countResults = userMapper.selectWorkStatus();
         for (CountResult c : countResults) {
-            if (c.getField() == null) {
-                c.setField("学生党");
-            } else {
+            if (c.getField()==null) {
+                c.setField("未知");
+            } else if (c.getField().equals("1")){
                 c.setField("工作党");
+            }
+            else
+            {
+                c.setField("学生党");
             }
         }
         return countResults;

@@ -98,13 +98,13 @@ public class UserController {
     }
 
     @GetMapping("/index")
-    public String getddd()
+    public String getindex()
     {
         return "index";
     }
 
     @GetMapping("/wel")
-    public String getddddd()
+    public String welcome()
     {
         return "welcome";
     }
@@ -112,9 +112,7 @@ public class UserController {
     @GetMapping(value = "/genderpie")
     public String genderpie()
     {
-
-
-        return "/echarts/echarts4";
+        return "/echarts/genderchart";
     }
 
     @PostMapping(value = "/getgenderdata")
@@ -134,5 +132,50 @@ public class UserController {
         return data;
     }
 
+    @GetMapping(value = "/locationpie")
+    public String locationpie()
+    {
+        return "/echarts/locationchart";
+    }
 
+    @PostMapping(value = "/getlocationdata")
+    @ResponseBody
+    public String getlocationdata()
+    {
+        List<CountResult> list =userService.selectAllCitys();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
+
+    @GetMapping(value = "/workstatuspie")
+    public String workstatuspie()
+    {
+        return "/echarts/workstatuschart";
+    }
+
+
+    @PostMapping(value = "/getworkstatusdata")
+    @ResponseBody
+    public String getworkstatusdata()
+    {
+        List<CountResult> list =userService.selectWorkStatus();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
 }

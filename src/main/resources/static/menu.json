@@ -82,7 +82,7 @@
     },
     {
       "id": 18,
-      "name": "系统统计",
+      "name": "统计",
       "icon": "&#xe6ce;",
       "url": "",
       "children": [
@@ -94,21 +94,21 @@
         },
         {
           "id": 20,
-          "name": "柱状图",
+          "name": "工作状态饼图",
           "icon": "",
-          "url": "./templates/echarts/echarts2.html"
+          "url": "/mini-love-admin/admin/user/workstatuspie"
         },
         {
           "id": 21,
-          "name": "地图",
+          "name": "地点饼图",
           "icon": "",
-          "url": "./templates/echarts/echarts3.html"
+          "url": "/mini-love-admin/admin/user/locationpie"
         },
         {
           "id": 22,
-          "name": "饼图",
+          "name": "用户性别饼图",
           "icon": "",
-          "url": "./templates/echarts/echarts4.html"
+          "url": "/mini-love-admin/admin/user/genderpie"
         },
         {
           "id": 23,
