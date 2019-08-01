@@ -1,6 +1,6 @@
 <!--此页面已废弃，仅供参考-->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <!--frame传值后再添加新数据的实现方法尝试页面备份-->
 	<head>
 		<meta charset="UTF-8">
@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="../../static/css/weadmin.css">
 		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script src="../../static/layui/layui.js" charset="utf-8"></script>
-		<script type="text/javascript" src="../../static/js/admin.js"></script>
+		<script type="text/javascript" th:src="@{/js/admin.js"></script>
 		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 		<!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>

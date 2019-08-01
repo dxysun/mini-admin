@@ -1,8 +1,11 @@
 package com.netease.miniadmin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.EchartResult;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
@@ -106,6 +109,30 @@ public class UserController {
         return "welcome";
     }
 
+    @GetMapping(value = "/genderpie")
+    public String genderpie()
+    {
+
+
+        return "/echarts/echarts4";
+    }
+
+    @PostMapping(value = "/getgenderdata")
+    @ResponseBody
+    public String getgenderdata()
+    {
+        List<CountResult> list =userService.selectAllGenders();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
 
 
 }
