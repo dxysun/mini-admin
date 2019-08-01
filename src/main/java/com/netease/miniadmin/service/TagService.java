@@ -1,5 +1,6 @@
 package com.netease.miniadmin.service;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.model.Tag;
 
 import java.util.List;
@@ -30,5 +31,5 @@ public interface TagService {
      */
     List<Tag> selectAllTags();
 
-    List<Tag> selectTagsByType(Integer tagClassify,Integer tagType);
+    Page<Tag> selectTagsByType( Integer tagType);
 }

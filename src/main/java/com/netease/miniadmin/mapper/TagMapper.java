@@ -1,5 +1,6 @@
 package com.netease.miniadmin.mapper;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.model.Tag;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -47,11 +48,11 @@ public interface TagMapper {
 
     /**
      * 根据类别获取标签
-     * @param tagClassify
+     *
      * @param tagType
      * @return
      */
-    List<Tag> selectTagsByType(@Param("tagClassify") Integer tagClassify, @Param("tagType") Integer tagType);
+    Page<Tag> selectTagsByType( @Param("tagType") Integer tagType);
 
 
     /**

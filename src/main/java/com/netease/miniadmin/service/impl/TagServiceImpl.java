@@ -1,5 +1,6 @@
 package com.netease.miniadmin.service.impl;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.mapper.TagMapper;
 import com.netease.miniadmin.model.Tag;
 import com.netease.miniadmin.service.TagService;
@@ -47,9 +48,9 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> selectTagsByType(Integer tagClassify, Integer tagType) {
-        if (tagClassify != null && tagType != null) {
-            return tagMapper.selectTagsByType(tagClassify, tagType);
+    public Page<Tag> selectTagsByType(Integer tagType) {
+        if ( tagType != null) {
+            return tagMapper.selectTagsByType(tagType);
         } else {
             return null;
         }
