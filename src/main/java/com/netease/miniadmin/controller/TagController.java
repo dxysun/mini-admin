@@ -7,9 +7,13 @@ import com.netease.miniadmin.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/tag")
@@ -41,5 +45,25 @@ public class TagController {
     @RequestMapping("/sendAddCategory")
     public String sendAddCategory(){
         return "/admin/categoryadd";
+    }
+
+
+    @RequestMapping(value = "/deleteTag",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> deleteTag(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        try{
+            int num = tagService.deleteTag(id);
+            if(num == 1){
+                map.put("success",true);
+            }else{
+                map.put("success",false);
+            }
+        }catch (Exception e){
+            map.put("success",false);
+            map.put("errMsg",e.toString());
+            return map;
+        }
+        return map;
     }
 }
