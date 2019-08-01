@@ -94,9 +94,9 @@
         },
         {
           "id": 20,
-          "name": "柱状图",
+          "name": "日记分布柱状图",
           "icon": "",
-          "url": "./templates/echarts/echarts2.html"
+          "url": "/mini-love-admin/admin/user/dynamicDistributeBar"
         },
         {
           "id": 21,
