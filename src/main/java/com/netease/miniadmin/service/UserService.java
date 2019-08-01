@@ -1,5 +1,6 @@
 package com.netease.miniadmin.service;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.model.User;
 import org.apache.ibatis.annotations.Param;
@@ -29,6 +30,6 @@ public interface UserService {
 
     List<CountResult> selectWorkStatusRatio();
 
-    List<User> getAllUsers();
+    Page<User> getAllUsers();
 
 }

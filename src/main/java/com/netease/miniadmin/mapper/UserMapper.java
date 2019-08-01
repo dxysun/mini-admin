@@ -1,5 +1,6 @@
 package com.netease.miniadmin.mapper;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserKey;
@@ -83,7 +84,7 @@ public interface UserMapper {
 
     List<CountResult> selectWorkStatus();
 
-    List<User> selectAllUser();
+    Page<User> selectAllUser();
 
 
 

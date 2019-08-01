@@ -1,5 +1,7 @@
 package com.netease.miniadmin.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
@@ -80,12 +82,14 @@ public class UserController {
         return null;
     }
     @RequestMapping("/getAllUserInfo")
-    public ModelAndView getAllUserInfo(){
+    public ModelAndView getAllUserInfo(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize){
+        PageHelper .startPage(pageNo,pageSize);
         ModelAndView modelAndView = new ModelAndView();
-        List<User> userList = userService.getAllUsers();
-        Integer userNum = userService.getUserCount();
-        modelAndView.addObject("userList",userList);
-        modelAndView.addObject("userNum",userNum);
+//        List<User> userList = userService.getAllUsers();
+//        Integer userNum = userService.getUserCount();
+        PageInfo<User> pageInfo = new PageInfo<>(userService.getAllUsers());
+        modelAndView.addObject("userList",pageInfo);
+//        modelAndView.addObject("userNum",userNum);
         modelAndView.setViewName("admin/list");
         return modelAndView;
     }

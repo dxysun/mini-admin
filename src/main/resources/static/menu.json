@@ -10,7 +10,7 @@
 				"id": 2,
 				"name": "用户列表",
 				"icon": "",
-				"url": "/mini-love-admin/admin/user/getAllUserInfo"
+				"url": "/mini-love-admin/admin/user/getAllUserInfo?pageNo=1&pageSize=6"
 			}, {
 				"id": 3,
 				"name": "用户删除",

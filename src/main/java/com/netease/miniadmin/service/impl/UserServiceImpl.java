@@ -1,5 +1,6 @@
 package com.netease.miniadmin.service.impl;
 
+import com.github.pagehelper.Page;
 import com.netease.miniadmin.dto.CountResult;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
@@ -179,7 +180,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public Page<User> getAllUsers() {
         return userMapper.selectAllUser();
     }
 }

@@ -28,24 +28,24 @@
 				<i class="layui-icon" style="line-height:30px">ဂ</i></a>
 		</div>
 		<div class="weadmin-body">
-			<div class="layui-row">
-				<form class="layui-form layui-col-md12 we-search">
-					<div class="layui-inline">
-						<input class="layui-input" placeholder="开始日" name="start" id="start">
-					</div>
-					<div class="layui-inline">
-						<input class="layui-input" placeholder="截止日" name="end" id="end">
-					</div>
-					<div class="layui-inline">
-						<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-					</div>
-					<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-				</form>
-			</div>
+			<!--<div class="layui-row">-->
+				<!--<form class="layui-form layui-col-md12 we-search">-->
+					<!--<div class="layui-inline">-->
+						<!--<input class="layui-input" placeholder="开始日" name="start" id="start">-->
+					<!--</div>-->
+					<!--<div class="layui-inline">-->
+						<!--<input class="layui-input" placeholder="截止日" name="end" id="end">-->
+					<!--</div>-->
+					<!--<div class="layui-inline">-->
+						<!--<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">-->
+					<!--</div>-->
+					<!--<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>-->
+				<!--</form>-->
+			<!--</div>-->
 			<div class="weadmin-block">
 				<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
 				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>
-				<span class="fr" style="line-height:40px">共有数据：<span th:text="${userNum}"></span> 条</span>
+				<span class="fr" style="line-height:40px">共有数据：<span th:text="${userList.total}"></span> 条</span>
 			</div>
 			<table class="layui-table">
 				<thead>
@@ -53,7 +53,7 @@
 						<th>
 							<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
 						</th>
-						<th>openId</th>
+						<th>Id</th>
 						<th>微信名</th>
 						<th>性别</th>
 						<th>地区</th>
@@ -64,17 +64,28 @@
 				</thead>
 				<tbody>
 					<tr>
+
+					<tr  th:each="collect,iterStat : ${userList.list}">
 						<td>
 							<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
 						</td>
-						<td>1</td>
-						<td>admin</td>
-						<td>18925139194</td>
-						<td>113664000@qq.com</td>
-						<td>超级管理员</td>
-						<td>2017-01-01 11:11:42</td>
-						<td></td>
-						<td></td>
+						<th scope="row" th:text="${collect.id}">1</th>
+						<td th:text="${collect.nickName}">Mark</td>
+						<td th:text="${collect.gender}">Otto</td>
+						<td th:text="${collect.city}">@mdo</td>
+						<td th:text="${collect.age}">index</td>
+						<td th:text="${collect.height}">index</td>
+						<td th:text="${collect.createTime}">index</td>
+						<td th:text="${collect.workStatus}">index</td>
+					</tr>
+						<!--<td>1</td>-->
+						<!--<td>admin</td>-->
+						<!--<td>18925139194</td>-->
+						<!--<td>113664000@qq.com</td>-->
+						<!--<td>超级管理员</td>-->
+						<!--<td>2017-01-01 11:11:42</td>-->
+						<!--<td></td>-->
+						<!--<td></td>-->
 						<!--<td class="td-status">-->
 							<!--<span class="layui-btn layui-btn-normal layui-btn-xs">已启用</span></td>-->
 						<!--<td class="td-manage">-->
@@ -88,21 +99,20 @@
 								<!--<i class="layui-icon">&#xe640;</i>-->
 							<!--</a>-->
 						<!--</td>-->
-					</tr>
+
 				</tbody>
 			</table>
 			<div class="page">
 				<div>
-					<a class="prev" href="">&lt;&lt;</a>
-					<a class="num" href="">1</a>
-					<span class="current">2</span>
-					<a class="num" href="">3</a>
-					<a class="num" href="">489</a>
-					<a class="next" href="">&gt;&gt;</a>
+					<a class="prev" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.prePage}+'&pageSize=6'}">&lt;&lt;</a>
+					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo=1&pageSize=6'}">1</a>
+					<span class="current"><span th:text="${userList.prePage+1}"></span></span>
+					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.pages}+'&pageSize=6'}" th:text="${userList.pages}" ></a>
+					<a class="next" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.nextPage}+'&pageSize=6'}">&gt;&gt;</a>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}" ></script>
     	<script type="text/javascript" charset="utf-8" th:src="@{/js/eleDel.js}"></script>
 		<script type="text/javascript" charset="utf-8" th:src="@{/js/admin.js}"></script>
 	</body>
