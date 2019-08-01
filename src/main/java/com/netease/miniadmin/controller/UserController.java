@@ -155,5 +155,27 @@ public class UserController {
         return data;
     }
 
+    @GetMapping(value = "/workstatuspie")
+    public String workstatuspie()
+    {
+        return "/echarts/workstatuschart";
+    }
 
+
+    @PostMapping(value = "/getworkstatusdata")
+    @ResponseBody
+    public String getworkstatusdata()
+    {
+        List<CountResult> list =userService.selectWorkStatus();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
 }
