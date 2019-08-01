@@ -125,7 +125,7 @@
 				"id": 22,
 				"name": "饼图",
 				"icon": "",
-				"url": "./templates/echarts/echarts4.html"
+				"url": "/mini-love-admin/admin/user/genderpie"
 			},
 			{
 				"id": 23,
