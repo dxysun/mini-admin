@@ -94,51 +94,51 @@
         },
         {
           "id": 20,
+          "name": "工作状态饼图",
+          "icon": "",
+          "url": "/mini-love-admin/admin/user/workstatuspie"
+        },
+        {
+          "id": 21,
           "name": "日记分布柱状图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/dynamicDistributeBar"
         },
         {
-          "id": 21,
+          "id": 22,
           "name": "地点饼图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/locationpie"
         },
         {
-          "id": 22,
+          "id": 23,
           "name": "用户性别饼图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/genderpie"
         },
         {
-          "id": 23,
+          "id": 24,
           "name": "雷达图",
           "icon": "",
           "url": "./templates/echarts/echarts5.html"
         },
         {
-          "id": 24,
+          "id": 25,
           "name": "k线图",
           "icon": "",
           "url": "./templates/echarts/echarts6.html"
         },
         {
-          "id": 25,
+          "id": 26,
           "name": "热力图",
           "icon": "",
           "url": "./templates/echarts/echarts7.html"
         },
         {
-          "id": 26,
+          "id": 27,
           "name": "仪表图",
           "icon": "",
           "url": "./templates/echarts/echarts8.html"
-        },
-        {
-          "id": 27,
-          "name": "地图DIY实例",
-          "icon": "",
-          "url": "./templates/echarts/echarts9.html"
         }
       ]
     }
