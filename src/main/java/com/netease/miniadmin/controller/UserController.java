@@ -71,28 +71,31 @@ public class UserController {
         return 1;
     }
 
+    @GetMapping(value = "/dynamicDistributeBar")
+    public String dynamicDistributeBar()
+    {
+        return "/echarts/dynamicbar";
+    }
+
     /**
      * 用于返回日记区间的用户分布
      * @author Xiang Jiangnan
      * @return
      */
     @RequestMapping("/getDynamicDistribute")
-    public List<Integer> getDynamicDistribute(){
-        List<Integer> arrayList = dynamicService.getDynamicDistribute();
-        if(!CollectionUtils.isEmpty(arrayList)){
-            return arrayList;
-        }
-        return null;
+    @ResponseBody
+    public String getDynamicDistribute(){
+        List<EchartResult> list = dynamicService.getDynamicDistribute();
+        String data = JSON.toJSONString(list);
+        return data;
     }
+
     @RequestMapping("/getAllUserInfo")
     public ModelAndView getAllUserInfo(@RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = "10") int pageSize){
         PageHelper .startPage(pageNo,pageSize);
         ModelAndView modelAndView = new ModelAndView();
-//        List<User> userList = userService.getAllUsers();
-//        Integer userNum = userService.getUserCount();
         PageInfo<User> pageInfo = new PageInfo<>(userService.getAllUsers());
         modelAndView.addObject("userList",pageInfo);
-//        modelAndView.addObject("userNum",userNum);
         modelAndView.setViewName("admin/list");
         return modelAndView;
     }
@@ -167,6 +170,28 @@ public class UserController {
     public String getworkstatusdata()
     {
         List<CountResult> list =userService.selectWorkStatus();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
+    @GetMapping(value = "/agepie")
+    public String agepie()
+    {
+        return "/echarts/agechart";
+    }
+
+    @PostMapping(value = "/getagedata")
+    @ResponseBody
+    public String getagedata()
+    {
+        List<CountResult> list =userService.selectAllages();
         List<EchartResult> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
         {

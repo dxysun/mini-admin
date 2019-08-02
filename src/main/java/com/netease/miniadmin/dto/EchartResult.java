@@ -6,6 +6,13 @@ public class EchartResult {
 
     private String name;
 
+    public EchartResult(){}
+
+    public EchartResult(String name, Integer value){
+        this.name = name;
+        this.value = value;
+    }
+
     public Integer getValue() {
         return value;
     }
