@@ -8,6 +8,7 @@ import com.netease.miniadmin.common.util.Constant;
 import com.netease.miniadmin.common.util.RedisUtil;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.MatchResultDto;
+import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.param.MatchingResult;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 获取用户总数
+     *
      * @return
      */
     @Override
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回地域分布
+     *
      * @return
      */
     @Override
@@ -60,11 +63,11 @@ public class UserServiceImpl implements UserService {
     public List<CountResultDto> selectAllages() {
         List<CountResultDto> list = userMapper.selectAllages();
         List<CountResultDto> resultList = new ArrayList<CountResultDto>();
-        CountResultDto c1 = new CountResultDto("20岁以下",0);
-        CountResultDto c2 = new CountResultDto("20岁-24岁",0);
-        CountResultDto c3 = new CountResultDto("25岁-30岁",0);
-        CountResultDto c4 = new CountResultDto("30岁以上",0);
-        CountResultDto c5 = new CountResultDto("未设置年龄",0);
+        CountResultDto c1 = new CountResultDto("20岁以下", 0);
+        CountResultDto c2 = new CountResultDto("20岁-24岁", 0);
+        CountResultDto c3 = new CountResultDto("25岁-30岁", 0);
+        CountResultDto c4 = new CountResultDto("30岁以上", 0);
+        CountResultDto c5 = new CountResultDto("未设置年龄", 0);
         for (CountResultDto c : list) {
             if (c.getField() == null) {
                 c5.setNum(c5.getNum() + 1);
@@ -115,6 +118,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回性别比率
+     *
      * @return
      */
     @Override
@@ -146,19 +150,18 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党和工作党人数
+     *
      * @return
      */
     @Override
     public List<CountResultDto> selectWorkStatus() {
         List<CountResultDto> countResultDtos = userMapper.selectWorkStatus();
         for (CountResultDto c : countResultDtos) {
-            if (c.getField()==null) {
+            if (c.getField() == null) {
                 c.setField("未知");
-            } else if (c.getField().equals("1")){
+            } else if (c.getField().equals("1")) {
                 c.setField("工作党");
-            }
-            else
-            {
+            } else {
                 c.setField("学生党");
             }
         }
@@ -167,6 +170,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党，工作党人数比例
+     *
      * @return
      */
     @Override
@@ -199,35 +203,55 @@ public class UserServiceImpl implements UserService {
     // 获取该用户匹配过 和匹配上的人数
     @Override
     public MatchResultDto getMatcherNumber(String openId) {
-        //redisUtil.set("qqqqqqqqqq","qqqqqwwwww");
-        //String object = (String) redisUtil.get("orq0K45uyGX-1QHmtvSyILiT-F6M");
-        MatchResultDto matchResultDto =new MatchResultDto(0,0);
+        MatchResultDto matchResultDto = new MatchResultDto(0, 0);
         int totalnumber = 0;
         int matchnumber = 0;
-        String mapJsonString = (String) redisUtil.get("orq0K45uyGX-1QHmtvSyILiT-F6M");
+        String mapJsonString = (String) redisUtil.get(openId);
+        if (mapJsonString == null) {
+            return matchResultDto;
+        }
         JSONObject matchingResultMap = JSON.parseObject(mapJsonString);
         Set<String> groupset = matchingResultMap.keySet();
 
-        for(String s:groupset)
-        {
+        for (String s : groupset) {
             System.out.println(s);
             JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
             System.out.println(matchingResultJsons);
-            for(int i=0;i<matchingResultJsons.size();i++)
-            {
-                JSONObject matchingResultJson =matchingResultJsons.getJSONObject(i);
-                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson,MatchingResult.class);
+            for (int i = 0; i < matchingResultJsons.size(); i++) {
+                JSONObject matchingResultJson = matchingResultJsons.getJSONObject(i);
+                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson, MatchingResult.class);
                 totalnumber++;
-                if(matchingResult.getMatchScore()> Constant.MATCHTHREHOLD)
-                {
+                if (matchingResult.getMatchScore() > Constant.MATCHTHREHOLD) {
                     matchnumber++;
                 }
             }
         }
         matchResultDto.setMatchNumber(matchnumber);
         matchResultDto.setTotalNumber(totalnumber);
-        System.out.println("total="+totalnumber+"  match="+matchnumber);
+        System.out.println("total=" + totalnumber + "  match=" + matchnumber);
 
         return matchResultDto;
+    }
+
+    @Override
+    public List<UserMatchDto> getUserMatch() {
+        List<User> userList = userMapper.selectAllUser();
+        List<UserMatchDto> userMatchDtoList = new ArrayList<>();
+        for (int i = 0; i < userList.size(); i++) {
+            UserMatchDto userMatchDto = new UserMatchDto();
+            userMatchDto.setId(userList.get(i).getId());
+            userMatchDto.setOpenId(userMapper.selectOpenIdById(userList.get(i).getId()));
+            userMatchDto.setNickName(userList.get(i).getNickName());
+            MatchResultDto matchResultDto = getMatcherNumber(userMatchDto.getOpenId());
+            userMatchDto.setMatchResultDto(matchResultDto);
+            double matchRatio = (double)matchResultDto.getMatchNumber()/matchResultDto.getTotalNumber();
+            if(matchResultDto.getTotalNumber()==0){
+                matchRatio = 0;
+            }
+            userMatchDto.setMatchRatio(matchRatio);
+            userMatchDtoList.add(userMatchDto);
+        }
+        return userMatchDtoList;
+
     }
 }

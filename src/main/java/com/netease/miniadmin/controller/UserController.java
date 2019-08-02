@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.EchartResultDto;
+import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
@@ -95,6 +96,15 @@ public class UserController {
         PageInfo<User> pageInfo = new PageInfo<>(userService.getAllUsers());
         modelAndView.addObject("userList",pageInfo);
         modelAndView.setViewName("admin/list");
+        return modelAndView;
+    }
+
+    @RequestMapping("/getUserMatchInfo")
+    public ModelAndView getUserMatchInfo(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<UserMatchDto> userMatchDtoList = userService.getUserMatch();
+        modelAndView.addObject("matchList",userMatchDtoList);
+        modelAndView.setViewName("admin/usermatchlist");
         return modelAndView;
     }
 

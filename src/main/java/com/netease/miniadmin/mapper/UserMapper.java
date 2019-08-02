@@ -84,6 +84,8 @@ public interface UserMapper {
 
     Page<User> selectAllUser();
 
+    String selectOpenIdById (Integer id);
+
 
 
 }
