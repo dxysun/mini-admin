@@ -1,8 +1,8 @@
 package com.netease.miniadmin.service.impl;
 
 import com.netease.miniadmin.common.Constant;
-import com.netease.miniadmin.dto.CountResult;
-import com.netease.miniadmin.dto.EchartResult;
+import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.mapper.DynamicsMapper;
 import com.netease.miniadmin.service.DynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,8 @@ import java.util.List;
       * @return 返回用户日记数量的集合
       */
     @Override
-    public List<CountResult> getDynamicsNum(){
-        List<CountResult> list = dynamicsMapper.selectDynamicsNum();
+    public List<CountResultDto> getDynamicsNum(){
+        List<CountResultDto> list = dynamicsMapper.selectDynamicsNum();
         if(!CollectionUtils.isEmpty(list)){
             return list;
         }
@@ -41,15 +41,15 @@ import java.util.List;
      * @return 返回不同日记区间的用户数的集合
      */
     @Override
-    public List<EchartResult> getDynamicDistribute(){
-        List<CountResult> list = getDynamicsNum();
+    public List<EchartResultDto> getDynamicDistribute(){
+        List<CountResultDto> list = getDynamicsNum();
         ArrayList<Integer> countList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
-        ArrayList<EchartResult> arrayList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
+        ArrayList<EchartResultDto> arrayList = new ArrayList<>(Constant.DynamicDistribute.DYNAMICSECTIONNUM);
         for(int i = 0; i < Constant.DynamicDistribute.DYNAMICSECTIONNUM; i++){
             countList.add(0);
         }
         if(!CollectionUtils.isEmpty(list)){
-            for(CountResult result: list){
+            for(CountResultDto result: list){
                 int num = result.getNum();
                 if(num <= Constant.DynamicDistribute.DYNAMICNUMPOINT1){
                     countList.set(0, countList.get(0) + 1);
@@ -64,7 +64,7 @@ import java.util.List;
                 }
             }
             for(int i = 0; i < countList.size(); i++){
-                arrayList.add(new EchartResult(Constant.DynamicDistribute.getDynamicSection(i), countList.get(i)));
+                arrayList.add(new EchartResultDto(Constant.DynamicDistribute.getDynamicSection(i), countList.get(i)));
             }
             return arrayList;
         }

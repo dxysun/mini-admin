@@ -1,11 +1,11 @@
 package com.netease.miniadmin.mapper;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.model.ConditionTag;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
+
 @Component
 public interface ConditionTagMapper {
     /**
@@ -60,5 +60,5 @@ public interface ConditionTagMapper {
      * 查询每一个条件标签被选择的次数
      * @return
      */
-    List<CountResult> selectEveryConditionTagCount();
+    List<CountResultDto> selectEveryConditionTagCount();
 }

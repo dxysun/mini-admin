@@ -1,11 +1,11 @@
 package com.netease.miniadmin.mapper;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.model.RequirementTag;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
+
 @Component
 public interface RequirementTagMapper {
     /**
@@ -60,5 +60,5 @@ public interface RequirementTagMapper {
      * 查询每一个需求标签被选择的次数
      * @return
      */
-    List<CountResult> selectEveryRequireTagCount();
+    List<CountResultDto> selectEveryRequireTagCount();
 }

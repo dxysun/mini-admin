@@ -1,6 +1,6 @@
 package com.netease.miniadmin.mapper;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.model.GroupRelation;
 import org.springframework.stereotype.Component;
 
@@ -59,5 +59,5 @@ public interface GroupRelationMapper {
      * 获取用户参与匹配的群数目
      * @return
      */
-    List<CountResult> getUserMathchGroupNum();
+    List<CountResultDto> getUserMathchGroupNum();
 }

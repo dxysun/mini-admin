@@ -1,6 +1,6 @@
 package com.netease.miniadmin.service.impl;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.mapper.GroupRelationMapper;
 import com.netease.miniadmin.service.GroupRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,9 @@ public class GroupRelationServiceImpl implements GroupRelationService {
      * 返回统计分布，参与一个群的有几个，两个群的有几个，参与n个群的有几个
      * author cuiyang
      */
-    public List<CountResult> getGroupNum() {
-        List<CountResult> list = groupRelationMapper.getUserMathchGroupNum();
-        List<CountResult> resultList = new ArrayList<CountResult>();
+    public List<CountResultDto> getGroupNum() {
+        List<CountResultDto> list = groupRelationMapper.getUserMathchGroupNum();
+        List<CountResultDto> resultList = new ArrayList<CountResultDto>();
         int maxGroupNum = -1;
         //获取用户最多的匹配群数
         for (int i = 0; i < list.size(); i++) {
@@ -37,7 +37,7 @@ public class GroupRelationServiceImpl implements GroupRelationService {
                     t++;
                 }
             }
-            CountResult result = new CountResult();
+            CountResultDto result = new CountResultDto();
             result.setField(String.valueOf(i));
             result.setNum(t);
             resultList.add(result);

@@ -1,16 +1,14 @@
 package com.netease.miniadmin.mapper;
 
 import com.github.pagehelper.Page;
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserKey;
 import com.netease.miniadmin.model.UserWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public interface UserMapper {
@@ -76,13 +74,13 @@ public interface UserMapper {
     /* 根据地点获取用户数 */
     int selectByCity(@Param("city")String city);
 
-    List<CountResult> selectAllCitys();
+    List<CountResultDto> selectAllCitys();
 
-    List<CountResult> selectAllages();
+    List<CountResultDto> selectAllages();
 
-    List<CountResult> selectAllGenders();
+    List<CountResultDto> selectAllGenders();
 
-    List<CountResult> selectWorkStatus();
+    List<CountResultDto> selectWorkStatus();
 
     Page<User> selectAllUser();
 

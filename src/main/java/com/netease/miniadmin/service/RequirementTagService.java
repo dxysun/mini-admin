@@ -1,10 +1,9 @@
 package com.netease.miniadmin.service;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 
 import java.util.List;
-import java.util.Map;
 
 public interface RequirementTagService {
-    List<CountResult> selectEveryRequireTagCount();
+    List<CountResultDto> selectEveryRequireTagCount();
 }

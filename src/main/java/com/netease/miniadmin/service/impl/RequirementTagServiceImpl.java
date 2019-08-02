@@ -1,6 +1,6 @@
 package com.netease.miniadmin.service.impl;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.mapper.RequirementTagMapper;
 import com.netease.miniadmin.service.RequirementTagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class RequirementTagServiceImpl implements RequirementTagService {
      * @return
      */
     @Override
-    public List<CountResult> selectEveryRequireTagCount() {
+    public List<CountResultDto> selectEveryRequireTagCount() {
         return requirementTagMapper.selectEveryRequireTagCount();
     }
 }

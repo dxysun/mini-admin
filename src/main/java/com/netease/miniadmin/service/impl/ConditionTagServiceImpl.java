@@ -1,6 +1,6 @@
 package com.netease.miniadmin.service.impl;
 
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.mapper.ConditionTagMapper;
 import com.netease.miniadmin.service.ConditionTagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ConditionTagServiceImpl implements ConditionTagService {
      * @return
      */
     @Override
-    public List<CountResult> selectEveryConditionTagCount() {
+    public List<CountResultDto> selectEveryConditionTagCount() {
         return conditionTagMapper.selectEveryConditionTagCount();
     }
 }

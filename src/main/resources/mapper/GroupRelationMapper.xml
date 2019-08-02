@@ -123,7 +123,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getUserMathchGroupNum" resultType="com.netease.miniadmin.dto.CountResult">
+  <select id="getUserMathchGroupNum" resultType="com.netease.miniadmin.dto.CountResultDto">
     select open_id as field ,count(*) as num from group_relation group by open_id
   </select>
 </mapper>

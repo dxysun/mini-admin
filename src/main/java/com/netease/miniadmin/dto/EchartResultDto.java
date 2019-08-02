@@ -1,14 +1,14 @@
 package com.netease.miniadmin.dto;
 
-public class EchartResult {
+public class EchartResultDto {
 
     private Integer value;
 
     private String name;
 
-    public EchartResult(){}
+    public EchartResultDto(){}
 
-    public EchartResult(String name, Integer value){
+    public EchartResultDto(String name, Integer value){
         this.name = name;
         this.value = value;
     }
