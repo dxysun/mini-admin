@@ -1,6 +1,7 @@
 package com.netease.miniadmin.service.impl;
 
 import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.mapper.GroupRelationMapper;
 import com.netease.miniadmin.service.GroupRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ public class GroupRelationServiceImpl implements GroupRelationService {
      * 返回统计分布，参与一个群的有几个，两个群的有几个，参与n个群的有几个
      * author cuiyang
      */
-    public List<CountResultDto> getGroupNum() {
+    public List<EchartResultDto> getGroupNum() {
         List<CountResultDto> list = groupRelationMapper.getUserMathchGroupNum();
-        List<CountResultDto> resultList = new ArrayList<CountResultDto>();
+
+        List<EchartResultDto> resultList = new ArrayList<EchartResultDto>();
         int maxGroupNum = -1;
         //获取用户最多的匹配群数
         for (int i = 0; i < list.size(); i++) {
@@ -37,9 +39,9 @@ public class GroupRelationServiceImpl implements GroupRelationService {
                     t++;
                 }
             }
-            CountResultDto result = new CountResultDto();
-            result.setField(String.valueOf(i));
-            result.setNum(t);
+            EchartResultDto result = new EchartResultDto();
+            result.setName(String.valueOf(i));
+            result.setValue(t);
             resultList.add(result);
         }
         return resultList;

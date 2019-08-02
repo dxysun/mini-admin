@@ -89,6 +89,12 @@
           "name": "用户性别饼图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/genderpie"
+        },
+        {
+          "id": 24,
+          "name": "群饼图",
+          "icon": "",
+          "url": "/mini-love-admin/admin/user/grouppie"
         }
       ]
     },

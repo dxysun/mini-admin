@@ -154,7 +154,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党和工作党人数
-     *
      * @return
      */
     @Override
@@ -174,7 +173,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党，工作党人数比例
-     *
      * @return
      */
     @Override
@@ -217,22 +215,25 @@ public class UserServiceImpl implements UserService {
         JSONObject matchingResultMap = JSON.parseObject(mapJsonString);
         Set<String> groupset = matchingResultMap.keySet();
 
-        for (String s : groupset) {
+        for(String s:groupset)
+        {
             System.out.println(s);
             JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
             System.out.println(matchingResultJsons);
-            for (int i = 0; i < matchingResultJsons.size(); i++) {
-                JSONObject matchingResultJson = matchingResultJsons.getJSONObject(i);
-                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson, MatchingResult.class);
+            for(int i=0;i<matchingResultJsons.size();i++)
+            {
+                JSONObject matchingResultJson =matchingResultJsons.getJSONObject(i);
+                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson,MatchingResult.class);
                 totalnumber++;
-                if (matchingResult.getMatchScore() > Constant.MATCHTHREHOLD) {
+                if(matchingResult.getMatchScore()> Constant.MATCHTHREHOLD)
+                {
                     matchnumber++;
                 }
             }
         }
         matchResultDto.setMatchNumber(matchnumber);
         matchResultDto.setTotalNumber(totalnumber);
-        System.out.println("total=" + totalnumber + "  match=" + matchnumber);
+        System.out.println("total="+totalnumber+"  match="+matchnumber);
 
         return matchResultDto;
     }

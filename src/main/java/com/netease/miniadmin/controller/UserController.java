@@ -8,6 +8,7 @@ import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
+import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,10 @@ public class UserController {
 
     @Autowired
     private DynamicService dynamicService;
+
+
+    @Autowired
+    private GroupRelationService groupRelationService;
 
     @RequestMapping("/getUserCount")
     public Map<String,Object> getUserCount(){
@@ -232,5 +237,20 @@ public class UserController {
         return map;
     }
 
+
+    @GetMapping(value = "/grouppie")
+    public String grouppie()
+    {
+        return "/echarts/groupchart";
+    }
+
+    @PostMapping(value = "/getgroupdata")
+    @ResponseBody
+    public String getgroupdata()
+    {
+        List<EchartResultDto> list =groupRelationService.getGroupNum();
+        String data = JSON.toJSONString(list);
+        return data;
+    }
 
 }
