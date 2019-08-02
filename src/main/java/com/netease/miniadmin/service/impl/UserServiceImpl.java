@@ -12,6 +12,7 @@ import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.param.MatchingResult;
+import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    DynamicService dynamicService;
 
     /**
      * 获取用户总数
@@ -237,10 +241,16 @@ public class UserServiceImpl implements UserService {
     public List<UserMatchDto> getUserMatch() {
         List<User> userList = userMapper.selectAllUser();
         List<UserMatchDto> userMatchDtoList = new ArrayList<>();
+        List<CountResultDto> countResultDtoList = dynamicService.getDynamicsNum();
         for (int i = 0; i < userList.size(); i++) {
             UserMatchDto userMatchDto = new UserMatchDto();
             userMatchDto.setId(userList.get(i).getId());
             userMatchDto.setOpenId(userMapper.selectOpenIdById(userList.get(i).getId()));
+            for(int j=0;j<countResultDtoList.size();j++){
+                if(countResultDtoList.get(j).getField().equals(userMatchDto.getOpenId())){
+                    userMatchDto.setDynamicCount(countResultDtoList.get(j).getNum());
+                }
+            }
             userMatchDto.setNickName(userList.get(i).getNickName());
             MatchResultDto matchResultDto = getMatcherNumber(userMatchDto.getOpenId());
             userMatchDto.setMatchResultDto(matchResultDto);

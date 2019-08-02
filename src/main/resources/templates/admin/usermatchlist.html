@@ -22,7 +22,7 @@
         <a href="">首页</a>
         <a href="">用户管理</a>
         <a>
-          <cite>用户匹配数列表</cite></a>
+          <cite>用户匹配动态统计</cite></a>
       </span>
     <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
@@ -53,6 +53,7 @@
             <th>Id</th>
             <th>openId</th>
             <th>微信名</th>
+            <th>发送动态数</th>
             <th>总匹配人数</th>
             <th>成功匹配数</th>
             <th>匹配率</th>
@@ -64,6 +65,7 @@
             <th scope="row" th:text="${collect.id}">1</th>
             <td th:text="${collect.openId}">Mark</td>
             <td th:text="${collect.nickName}">Mark</td>
+            <td th:text="${collect.dynamicCount}">Mark</td>
             <td th:text="${collect.matchResultDto.totalNumber}">@mdo</td>
             <td th:text="${collect.matchResultDto.matchNumber}">@mdo</td>
             <td th:text="${collect.matchRatio}">index</td>

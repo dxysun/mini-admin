@@ -6,6 +6,15 @@ public class UserMatchDto {
     String nickName;
     MatchResultDto matchResultDto;
     Double matchRatio;
+    Integer dynamicCount;
+
+    public Integer getDynamicCount() {
+        return dynamicCount;
+    }
+
+    public void setDynamicCount(Integer dynamicCount) {
+        this.dynamicCount = dynamicCount;
+    }
 
     public Double getMatchRatio() {
         return matchRatio;

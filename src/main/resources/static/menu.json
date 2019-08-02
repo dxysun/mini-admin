@@ -16,7 +16,7 @@
         },
         {
           "id": 2,
-          "name": "用户匹配数列表",
+          "name": "用户匹配动态统计",
           "icon": "",
           "url": "/mini-love-admin/admin/user/getUserMatchInfo"
         }
