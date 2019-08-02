@@ -7,6 +7,15 @@ public class CountResult {
     private String field;
     private Integer num;
 
+
+    public CountResult(String field, Integer num) {
+        this.field = field;
+        this.num = num;
+    }
+
+    public CountResult() {
+    }
+
     public String getField() {
         return field;
     }

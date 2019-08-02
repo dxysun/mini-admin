@@ -50,31 +50,27 @@ public class UserServiceImpl implements UserService {
     public List<CountResult> selectAllages() {
         List<CountResult> list = userMapper.selectAllages();
         List<CountResult> resultList = new ArrayList<CountResult>();
-        CountResult c1 = new CountResult();
-        c1.setField("20岁以下");
-        c1.setNum(0);
-        CountResult c2 = new CountResult();
-        c2.setField("20岁-30岁");
-        c2.setNum(0);
-        CountResult c3 = new CountResult();
-        c3.setField("30岁以上");
-        c3.setNum(0);
-        CountResult c4 = new CountResult();
-        c4.setField("未设置年龄");
-        c4.setNum(0);
+        CountResult c1 = new CountResult("20岁以下",0);
+        CountResult c2 = new CountResult("20岁-24岁",0);
+        CountResult c3 = new CountResult("25岁-30岁",0);
+        CountResult c4 = new CountResult("30岁以上",0);
+        CountResult c5 = new CountResult("未设置年龄",0);
         for (CountResult c : list) {
             if (c.getField() == null) {
-                c4.setNum(c4.getNum() + 1);
+                c5.setNum(c5.getNum() + 1);
                 continue;
             }
             if (Integer.valueOf(c.getField()) < 20) {
                 c1.setNum(c1.getNum() + 1);
             }
-            if (Integer.valueOf(c.getField()) >= 20 && Integer.valueOf(c.getField()) <= 30) {
+            if (Integer.valueOf(c.getField()) >= 20 && Integer.valueOf(c.getField()) <= 24) {
                 c2.setNum(c2.getNum() + 1);
             }
-            if (Integer.valueOf(c.getField()) > 30) {
+            if (Integer.valueOf(c.getField()) >= 25 && Integer.valueOf(c.getField()) <= 30) {
                 c3.setNum(c3.getNum() + 1);
+            }
+            if (Integer.valueOf(c.getField()) > 30) {
+                c4.setNum(c4.getNum() + 1);
             }
 
         }
@@ -82,6 +78,7 @@ public class UserServiceImpl implements UserService {
         resultList.add(c2);
         resultList.add(c3);
         resultList.add(c4);
+        resultList.add(c5);
         return resultList;
     }
 

@@ -88,9 +88,9 @@
       "children": [
         {
           "id": 19,
-          "name": "拆线图",
+          "name": "年龄分布饼图",
           "icon": "",
-          "url": "./templates/echarts/echarts1.html"
+          "url": "/mini-love-admin/admin/user/agepie"
         },
         {
           "id": 20,

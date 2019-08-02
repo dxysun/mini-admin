@@ -181,4 +181,26 @@ public class UserController {
         String data = JSON.toJSONString(list1);
         return data;
     }
+    @GetMapping(value = "/agepie")
+    public String agepie()
+    {
+        return "/echarts/agechart";
+    }
+
+    @PostMapping(value = "/getagedata")
+    @ResponseBody
+    public String getagedata()
+    {
+        List<CountResult> list =userService.selectAllages();
+        List<EchartResult> list1=new ArrayList<>();
+        for(int i=0;i<list.size();i++)
+        {
+            EchartResult result=new EchartResult();
+            result.setName(list.get(i).getField());
+            result.setValue(list.get(i).getNum());
+            list1.add(result);
+        }
+        String data = JSON.toJSONString(list1);
+        return data;
+    }
 }
