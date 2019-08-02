@@ -1,22 +1,30 @@
 package com.netease.miniadmin.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.common.util.AjaxObject;
 import com.netease.miniadmin.common.util.Result;
+import com.netease.miniadmin.model.Tag;
 import com.netease.miniadmin.model.UserFeedback;
 import com.netease.miniadmin.service.UserFeedbackService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author XiaBin
  * @date 2019-07-31 11:24
  */
-@RestController
+@Controller
 @RequestMapping("/admin/userFeedback")
 public class UserFeedbackController {
 
@@ -29,6 +37,7 @@ public class UserFeedbackController {
      * @return
      */
     @RequestMapping("/getFeedbackById")
+    @ResponseBody
     public Result getUserCount(@RequestParam("id") Integer id){
         if (id == null){
             AjaxObject.error("不能获得反馈id");
@@ -48,41 +57,49 @@ public class UserFeedbackController {
      * @return
      */
     @RequestMapping("/deleteById")
-    public Result deleteById(@RequestParam("id") Integer id){
+    @ResponseBody
+    public Map<String, Object> deleteById(@RequestParam("id") Integer id){
         if (id == null){
             AjaxObject.error("无法获得反馈id");
         }
-        try {
-            int result = userFeedbackService.deleteByPrimaryKey(id);
-            if (result == 1){
-                return AjaxObject.success("删除成功");
+        Map<String,Object> map = new HashMap<>(16);
+        try{
+            int num = userFeedbackService.deleteByPrimaryKey(id);
+            if(num == 1){
+                map.put("success",true);
             }else{
-                return AjaxObject.success("删除失败");
+                map.put("success",false);
             }
         }catch (Exception e){
-            return AjaxObject.error(e);
+            map.put("success",false);
+            map.put("errMsg",e.toString());
+            return map;
         }
+        return map;
     }
 
     /**
      * 分页查询反馈数据
-     * @param currentPage
+     * @param pageNo
      * @param pageSize
      * @return
      */
     @RequestMapping("/getPageQueryInfo")
-    public Result pageQuery(@RequestParam("currentPage") Integer currentPage,@RequestParam("pageSize") Integer pageSize){
-        List<UserFeedback> list;
+    public ModelAndView pageQuery(@RequestParam(defaultValue = "1") Integer pageNo,@RequestParam(defaultValue = "10") Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("feedback/allFeedback");
         try {
-            int currentIndex = (currentPage - 1)*pageSize;
-            list = userFeedbackService.pageQuery(currentIndex,pageSize);
-            if (list.size() == 0 || list == null){
-                return AjaxObject.success("数据为空",null);
+            PageInfo<UserFeedback> pageInfo = new PageInfo<>(userFeedbackService.pageQuery());
+            if (pageInfo.getList().size() == 0 || pageInfo.getList() == null){
+                return modelAndView;
             }else{
-                return AjaxObject.success("查询数据成功",list);
+                modelAndView.addObject("feedbackLists",pageInfo);
+                return modelAndView;
             }
         }catch (Exception e){
-            return AjaxObject.error(e);
+            return modelAndView;
         }
     }
+
 }

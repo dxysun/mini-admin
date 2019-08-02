@@ -29,5 +29,5 @@ public interface UserFeedbackService {
      * 分页查询反馈信息
      * @return
      */
-    List<UserFeedback> pageQuery(Integer currentIndex, Integer pageSize);
+    List<UserFeedback> pageQuery();
 }

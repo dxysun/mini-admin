@@ -34,10 +34,7 @@ public class UserFeedbackServiceImpl implements UserFeedbackService {
     }
 
     @Override
-    public List<UserFeedback> pageQuery(Integer currentIndex, Integer pageSize) {
-        PageQuery pageQuery = new PageQuery();
-        pageQuery.setCurrentIndex(currentIndex);
-        pageQuery.setPageSize(pageSize);
-        return userFeedbackMapper.pageQuery(pageQuery);
+    public List<UserFeedback> pageQuery() {
+        return userFeedbackMapper.pageQuery();
     }
 }

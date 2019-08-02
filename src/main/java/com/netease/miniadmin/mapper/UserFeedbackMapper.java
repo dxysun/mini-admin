@@ -66,5 +66,5 @@ public interface UserFeedbackMapper {
      * 分页查询
      * @return
      */
-    List<UserFeedback> pageQuery(PageQuery pageQuery);
+    List<UserFeedback> pageQuery();
 }

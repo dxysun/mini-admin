@@ -75,6 +75,30 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		});
 	}
 
+	/*反馈-删除*/
+	window.feedback_del = function (obj, id) {
+		layer.confirm('确认要删除反馈吗？', function(index) {
+			//发异步删除数据
+			$.ajax({
+				url : "/mini-love-admin/admin/userFeedback/deleteById",
+				type :'POST',
+				data :{
+					"id": id
+				},
+				success:function (data) {
+					if(data.success){
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!', {
+							icon: 1,
+							time: 1000
+						});
+					}
+				}
+
+			})
+		});
+	}
+
 	window.delAll = function (argument) {
 		var data = tableCheck.getData();
 		layer.confirm('确认要删除吗？' + data, function(index) {
