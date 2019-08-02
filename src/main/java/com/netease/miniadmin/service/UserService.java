@@ -36,5 +36,7 @@ public interface UserService {
 
     List<UserMatchDto> getUserMatch();
 
+    int deleteUser(Integer id);
+
 
 }

@@ -51,7 +51,7 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		});
 	}
 
-	/*用户-删除*/
+	/*标签-删除*/
 	window.member_del = function (obj, id) {
 		layer.confirm('确认要删除吗？', function(index) {
 			//发异步删除数据
@@ -74,7 +74,29 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 			})
 		});
 	}
+	/*用户-删除*/
+	window.user_del = function (obj, id) {
+		layer.confirm('确认要删除吗？', function(index) {
+			//发异步删除数据
+			$.ajax({
+				url : "/mini-love-admin/admin/user/deleteUser",
+				type :'POST',
+				data :{
+					"id": id
+				},
+				success:function (data) {
+					if(data.success){
+						$(obj).parents("tr").remove();
+						layer.msg('已删除!', {
+							icon: 1,
+							time: 1000
+						});
+					}
+				}
 
+			})
+		});
+	}
 	/*反馈-删除*/
 	window.feedback_del = function (obj, id) {
 		layer.confirm('确认要删除反馈吗？', function(index) {

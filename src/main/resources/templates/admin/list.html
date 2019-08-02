@@ -43,8 +43,8 @@
 				<!--</form>-->
 			<!--</div>-->
 			<div class="weadmin-block">
-				<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-				<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>
+				<!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+				<!--<button class="layui-btn" onclick="WeAdminShow('添加用户','./add.html')"><i class="layui-icon"></i>添加</button>-->
 				<span class="fr" style="line-height:40px">共有数据：<span th:text="${userList.total}"></span> 条</span>
 			</div>
 			<table class="layui-table">
@@ -61,6 +61,7 @@
 						<th>身高</th>
 						<th>加入时间</th>
 						<th>工作状态</th>
+						<th>操作</th>
 				</thead>
 				<tbody>
 					<tr>
@@ -82,6 +83,11 @@
 						<td th:if="${collect.workStatus} eq 0">学生党</td>
 						<td th:if="${collect.workStatus} eq 1">工作党</td>
 						<td th:if="${collect.workStatus} eq null">未知</td>
+						<td class="td-manage">
+							<a title="删除" th:onclick="user_del(this,[[${collect.id}]])" href="javascript:;">
+								<i class="layui-icon">&#xe640;</i>
+							</a>
+						</td>
 					</tr>
 						<!--<td>1</td>-->
 						<!--<td>admin</td>-->
@@ -93,17 +99,7 @@
 						<!--<td></td>-->
 						<!--<td class="td-status">-->
 							<!--<span class="layui-btn layui-btn-normal layui-btn-xs">已启用</span></td>-->
-						<!--<td class="td-manage">-->
-							<!--<a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">-->
-								<!--<i class="layui-icon">&#xe601;</i>-->
-							<!--</a>-->
-							<!--<a title="编辑" onclick="WeAdminShow('编辑','./edit.html')" href="javascript:;">-->
-								<!--<i class="layui-icon">&#xe642;</i>-->
-							<!--</a>-->
-							<!--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">-->
-								<!--<i class="layui-icon">&#xe640;</i>-->
-							<!--</a>-->
-						<!--</td>-->
+
 
 				</tbody>
 			</table>

@@ -426,4 +426,8 @@
   <select id="selectOpenIdById" parameterType="Integer" resultType="String">
     select open_id from user where id = #{id}
   </select>
+
+  <delete id="deleteUserById" parameterType="Integer">
+    delete from user where id = #{id}
+  </delete>
 </mapper>

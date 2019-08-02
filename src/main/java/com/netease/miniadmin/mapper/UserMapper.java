@@ -86,6 +86,8 @@ public interface UserMapper {
 
     String selectOpenIdById (Integer id);
 
+    int deleteUserById(@Param("id") Integer id);
+
 
 
 }

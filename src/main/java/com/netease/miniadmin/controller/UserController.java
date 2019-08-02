@@ -213,4 +213,24 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> deleteTag(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        try{
+            int num = userService.deleteUser(id);
+            if(num == 1){
+                map.put("success",true);
+            }else{
+                map.put("success",false);
+            }
+        }catch (Exception e){
+            map.put("success",false);
+            map.put("errMsg",e.toString());
+            return map;
+        }
+        return map;
+    }
+
+
 }

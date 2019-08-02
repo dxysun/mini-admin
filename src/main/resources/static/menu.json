@@ -55,38 +55,6 @@
       ]
     },
     {
-      "id": 13,
-      "name": "管理员权限",
-      "icon": "&#xe726;",
-      "url": "",
-      "children": [
-        {
-          "id": 14,
-          "name": "管理员列表",
-          "icon": "",
-          "url": "./templates/admin/list.html"
-        },
-        {
-          "id": 15,
-          "name": "角色管理",
-          "icon": "",
-          "url": "./templates/admin/role.html"
-        },
-        {
-          "id": 16,
-          "name": "权限分类",
-          "icon": "",
-          "url": "./templates/admin/cate.html"
-        },
-        {
-          "id": 17,
-          "name": "权限管理",
-          "icon": "",
-          "url": "./templates/admin/rule.html"
-        }
-      ]
-    },
-    {
       "id": 18,
       "name": "统计",
       "icon": "&#xe6ce;",
@@ -121,30 +89,6 @@
           "name": "用户性别饼图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/genderpie"
-        },
-        {
-          "id": 24,
-          "name": "雷达图",
-          "icon": "",
-          "url": "./templates/echarts/echarts5.html"
-        },
-        {
-          "id": 25,
-          "name": "k线图",
-          "icon": "",
-          "url": "./templates/echarts/echarts6.html"
-        },
-        {
-          "id": 26,
-          "name": "热力图",
-          "icon": "",
-          "url": "./templates/echarts/echarts7.html"
-        },
-        {
-          "id": 27,
-          "name": "仪表图",
-          "icon": "",
-          "url": "./templates/echarts/echarts8.html"
         }
       ]
     },

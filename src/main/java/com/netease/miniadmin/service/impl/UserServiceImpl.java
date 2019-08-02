@@ -254,4 +254,9 @@ public class UserServiceImpl implements UserService {
         return userMatchDtoList;
 
     }
+
+    @Override
+    public int deleteUser(Integer id) {
+        return userMapper.deleteUserById(id);
+    }
 }
