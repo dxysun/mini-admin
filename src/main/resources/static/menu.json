@@ -118,9 +118,9 @@
         },
         {
           "id": 24,
-          "name": "雷达图",
+          "name": "用户动态排行榜柱状图",
           "icon": "",
-          "url": "./templates/echarts/echarts5.html"
+          "url": "/mini-love-admin/admin/user/topDynamicNumBar"
         },
         {
           "id": 25,

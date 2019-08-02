@@ -86,6 +86,8 @@ public interface UserMapper {
 
     Page<User> selectAllUser();
 
+    List<String> selectNickNameByOpenId(@Param("list")List<String> list);
+
 
 
 }

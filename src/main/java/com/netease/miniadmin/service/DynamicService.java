@@ -8,4 +8,5 @@ import java.util.List;
 public interface DynamicService {
     List<CountResult> getDynamicsNum();
     List<EchartResult> getDynamicDistribute();
+    List<EchartResult> getTopFiveDynamicNum();
 }

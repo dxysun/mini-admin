@@ -82,7 +82,12 @@
   <select id="selectWorkStatus" resultType="com.netease.miniadmin.dto.CountResult">
     select work_status as field,count(*) as num from user GROUP BY work_status
   </select>
-
+  <select id="selectNickNameByOpenId" parameterType="java.util.List" resultType="String">
+    select nick_name from user where open_id in
+    <foreach collection="list" item="openid" index="index" open="(" separator="," close=")">
+      #{openid}
+    </foreach>
+  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.netease.miniadmin.model.UserKey" >
     <!--
       WARNING - @mbggenerated
