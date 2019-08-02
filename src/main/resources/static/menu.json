@@ -92,23 +92,13 @@
         },
         {
           "id": 24,
-<<<<<<< HEAD
-          "name": "群饼图",
-=======
           "name": "用户动态排行榜柱状图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/topDynamicNumBar"
         },
         {
           "id": 25,
-          "name": "k线图",
-          "icon": "",
-          "url": "./templates/echarts/echarts6.html"
-        },
-        {
-          "id": 26,
-          "name": "热力图",
->>>>>>> dev_xjn
+          "name": "群饼图",
           "icon": "",
           "url": "/mini-love-admin/admin/user/grouppie"
         }

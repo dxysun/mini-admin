@@ -219,7 +219,6 @@ public class UserServiceImpl implements UserService {
         {
             System.out.println(s);
             JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
-            System.out.println(matchingResultJsons);
             for(int i=0;i<matchingResultJsons.size();i++)
             {
                 JSONObject matchingResultJson =matchingResultJsons.getJSONObject(i);
@@ -233,7 +232,6 @@ public class UserServiceImpl implements UserService {
         }
         matchResultDto.setMatchNumber(matchnumber);
         matchResultDto.setTotalNumber(totalnumber);
-        System.out.println("total="+totalnumber+"  match="+matchnumber);
 
         return matchResultDto;
     }

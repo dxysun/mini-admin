@@ -50,19 +50,6 @@ public class UserController {
     {
         return "/echarts/topdynamicbar";
     }
-    /**
-     * 用于返回每个用户动态数目的接口
-     * @author Xiang Jiangnan
-     * @return
-     */
-//   @RequestMapping("/getDynamicsNum")
-//    public List<CountResultDto> getDynamicsNum() {
-//       List<CountResultDto> list = dynamicService.getDynamicsNum();
-//       if (!CollectionUtils.isEmpty(list)) {
-//           return list;
-//       }
-//       return null;
-//   }
 
    @RequestMapping("/getTopFiveDynamicNum")
    @ResponseBody
