@@ -32,4 +32,6 @@ public interface TagService {
     List<Tag> selectAllTags();
 
     Page<Tag> selectTagsByType( Integer tagType);
+
+    Tag selectTagById(Integer id);
 }

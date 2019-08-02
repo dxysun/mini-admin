@@ -37,7 +37,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public Integer updateTag(Tag tag) {
         if (tag != null) {
-            return tagMapper.updateByPrimaryKey(tag);
+            return tagMapper.updateByPrimaryKeySelective(tag);
         }
         return null;
     }
@@ -54,5 +54,10 @@ public class TagServiceImpl implements TagService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Tag selectTagById(Integer id) {
+        return tagMapper.selectByPrimaryKey(id);
     }
 }

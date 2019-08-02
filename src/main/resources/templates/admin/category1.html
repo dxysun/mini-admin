@@ -77,7 +77,7 @@
                 <!--<a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">-->
                     <!--<i class="layui-icon">&#xe601;</i>-->
                 <!--</a>-->
-                <a title="编辑" onclick="WeAdminShow('编辑','./role-add.html')" href="javascript:;">
+                <a title="编辑" th:onclick="WeAdminShow('编辑','/mini-love-admin/admin/tag/sendEditCategory?id='+[[${collect.id}]])" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
                 <a title="删除" th:onclick="member_del(this,[[${collect.id}]])" href="javascript:;">

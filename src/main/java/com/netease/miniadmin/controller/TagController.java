@@ -50,6 +50,11 @@ public class TagController {
         return "/admin/categoryadd";
     }
 
+    @RequestMapping("/sendEditCategory")
+    public String sendEditCategory(HttpServletRequest request){
+        return "/admin/categoryedit";
+    }
+
 
     @RequestMapping(value = "/deleteTag",method = RequestMethod.POST)
     @ResponseBody
@@ -88,6 +93,52 @@ public class TagController {
         tag.setCreateTime(new Date());
         try{
             tagService.insertTag(tag);
+        }catch (Exception e){
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+
+        modelMap.put("success",true);
+        return modelMap;
+
+    }
+
+    @RequestMapping("/getTagById")
+    @ResponseBody
+    private Map<String, Object> getTagById(@RequestParam Integer id){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        if(id !=null){
+            Tag tag = tagService.selectTagById(id);
+            if(tag !=null){
+                modelMap.put("tag",tag);
+                modelMap.put("success", true);
+            }else{
+                modelMap.put("success", false);
+            }
+        }else{
+            modelMap.put("success", false);
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/updateTag", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> updateTag(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        Tag tag = null;
+        String tagtStr = request.getParameter("tagStr");
+        try {
+            tag = mapper.readValue(tagtStr, Tag.class);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+        tag.setModifyTime(new Date());
+        try{
+            tagService.updateTag(tag);
         }catch (Exception e){
             modelMap.put("success", false);
             modelMap.put("errMsg", e.toString());

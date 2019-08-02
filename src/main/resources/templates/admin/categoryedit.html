@@ -39,7 +39,7 @@
                     <!--</td>-->
                     <td>
                         <div class="layui-input-block">
-                            <input name="rd1" type="radio" checked="checked"   value="1"> 男生个人标签
+                            <input name="rd1" type="radio"    value="1"> 男生个人标签
                             <input name="rd1" type="radio" value="3"> 女生个人标签
                             <input name="rd1" type="radio" value="0"> 男生对女生的要求标签
                             <input name="rd1" type="radio" value="2"> 女生对男生的要求标签
@@ -57,12 +57,12 @@
                 <tbody>
                 <tr>
                     <!--<td>-->
-                        <!--标签类型-->
-                        <!--<input name="id[]" type="checkbox" value="2">-->
+                    <!--标签类型-->
+                    <!--<input name="id[]" type="checkbox" value="2">-->
                     <!--</td>-->
                     <td>
                         <div class="layui-input-block">
-                            <input name="rd2" type="radio" checked="checked"   value="0"> 外在
+                            <input name="rd2" type="radio"    value="0"> 外在
                             <input name="rd2" type="radio" value="1"> 内在
                             <input name="rd2" type="radio" value="2"> 兴趣
                             <input name="rd2" type="radio" value="3"> 其他
@@ -73,23 +73,23 @@
             </table>
         </div>
         <!--<div class="layui-form-item layui-form-text">-->
-            <!--<label for="desc" class="layui-form-label">-->
-                <!--描述-->
-            <!--</label>-->
-            <!--<div class="layui-input-block">-->
-                <!--<textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>-->
-            <!--</div>-->
+        <!--<label for="desc" class="layui-form-label">-->
+        <!--描述-->
+        <!--</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<textarea placeholder="请输入内容" id="desc" name="desc" class="layui-textarea"></textarea>-->
+        <!--</div>-->
         <!--</div>-->
         <div class="layui-form-item">
-            <button class="layui-btn" id="submit" lay-submit="" lay-filter="add">增加</button>
+            <button class="layui-btn" id="submit" lay-submit="" lay-filter="add">编辑</button>
         </div>
     </div>
 </div>
 <script type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}" ></script>
 
 <script type="text/javascript">
-
-        var edit = getQueryString('edit');
+    var id = getQueryString('id');
+    var tag ={};
 
     layui.extend({
         // admin: '{/}../../static/js/admin'
@@ -102,20 +102,31 @@
             layer = layui.layer;
             $ = layui.jquery;
 
-        if(edit == 1) {
-            $("#submit").text("编辑");
-        }
+    function getInfo(){
+        $.getJSON('/mini-love-admin/admin/tag/getTagById?id='+id,function(data){
+            if(data.success){
+                alert(id);
+                alert("数据获取成功")
+                tag =data.tag;
+                $('#name').val(tag.tagName);
+                $(":radio[name='rd1'][value='" + tag.tagType + "']").prop("checked", "checked");
+                $(":radio[name='rd2'][value='" + tag.tagClassify + "']").prop("checked", "checked");
+            }
+        });
+    }
+    getInfo()
         //监听提交
         form.on('submit(add)', function(data) {
             console.log(data);
-            var tag = {};
-            tag.tagName = $('#name').val();
-            tag.tagClassify =  $("input[name='rd2']:checked").val();
-            tag.tagType = $("input[name='rd1']:checked").val();
+            var newTag = {};
+            newTag.id = tag.id;
+            newTag.tagName = $('#name').val();
+            newTag.tagClassify =  $("input[name='rd2']:checked").val();
+            newTag.tagType = $("input[name='rd1']:checked").val();
             var formData = new FormData();
-            formData.append('tagStr', JSON.stringify(tag));
+            formData.append('tagStr', JSON.stringify(newTag));
             $.ajax({
-                url : "/mini-love-admin/admin/tag/addTag",
+                url : "/mini-love-admin/admin/tag/updateTag",
                 type : 'post',
                 data : formData,
                 contentType : false,
@@ -123,7 +134,7 @@
                 cache : false,
                 success :function (data) {
                     if(data.success){
-                        layer.alert("增加成功", {
+                        layer.alert("编辑成功", {
                             icon: 6
                         }, function() {
                             // 获得frame索引
@@ -132,7 +143,7 @@
                             parent.layer.close(index);
                         });
                     }else {
-                        $.toast('提交失败！');
+                        $.toast('编辑失败！');
                         return false;
                     }
                 }

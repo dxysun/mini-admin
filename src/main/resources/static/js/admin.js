@@ -322,7 +322,7 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 			shadeClose: true,
 			shade: 0.4,
 			title: title,
-			content: url
+			content: url,
 		});
 	}
 	/*弹出层+传递ID参数*/
