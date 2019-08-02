@@ -1,5 +1,6 @@
 package com.netease.miniadmin.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.model.Tag;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,4 +69,35 @@ public class TagController {
         }
         return map;
     }
+
+    @RequestMapping(value = "/addTag", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> addTag(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        Tag tag = null;
+        String tagtStr = request.getParameter("tagStr");
+        try {
+            tag = mapper.readValue(tagtStr, Tag.class);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+        tag.setModifyTime(new Date());
+        tag.setCreateTime(new Date());
+        try{
+            tagService.insertTag(tag);
+        }catch (Exception e){
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+
+        modelMap.put("success",true);
+        return modelMap;
+
+    }
+
+
 }
