@@ -1,11 +1,10 @@
 package com.netease.miniadmin.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.netease.miniadmin.dto.CountResult;
-import com.netease.miniadmin.dto.EchartResult;
+import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,8 +45,8 @@ public class UserController {
      * @return
      */
    @RequestMapping("/getDynamicsNum")
-    public List<CountResult> getDynamicsNum(){
-       List<CountResult> list = dynamicService.getDynamicsNum();
+    public List<CountResultDto> getDynamicsNum(){
+       List<CountResultDto> list = dynamicService.getDynamicsNum();
        if(!CollectionUtils.isEmpty(list)){
            return list;
        }
@@ -66,7 +64,7 @@ public class UserController {
     @GetMapping("/getAllCitys")
     public Integer getAllCitys() {
         Map<String, Integer> map = new HashMap<>();
-        List<CountResult> list = new ArrayList<>();
+        List<CountResultDto> list = new ArrayList<>();
         list = userService.selectAllCitys();
         return 1;
     }
@@ -85,7 +83,7 @@ public class UserController {
     @RequestMapping("/getDynamicDistribute")
     @ResponseBody
     public String getDynamicDistribute(){
-        List<EchartResult> list = dynamicService.getDynamicDistribute();
+        List<EchartResultDto> list = dynamicService.getDynamicDistribute();
         String data = JSON.toJSONString(list);
         return data;
     }
@@ -122,11 +120,11 @@ public class UserController {
     @ResponseBody
     public String getgenderdata()
     {
-        List<CountResult> list =userService.selectAllGenders();
-        List<EchartResult> list1=new ArrayList<>();
+        List<CountResultDto> list =userService.selectAllGenders();
+        List<EchartResultDto> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
         {
-            EchartResult result=new EchartResult();
+            EchartResultDto result=new EchartResultDto();
             result.setName(list.get(i).getField());
             result.setValue(list.get(i).getNum());
             list1.add(result);
@@ -145,11 +143,11 @@ public class UserController {
     @ResponseBody
     public String getlocationdata()
     {
-        List<CountResult> list =userService.selectAllCitys();
-        List<EchartResult> list1=new ArrayList<>();
+        List<CountResultDto> list =userService.selectAllCitys();
+        List<EchartResultDto> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
         {
-            EchartResult result=new EchartResult();
+            EchartResultDto result=new EchartResultDto();
             result.setName(list.get(i).getField());
             result.setValue(list.get(i).getNum());
             list1.add(result);
@@ -169,11 +167,11 @@ public class UserController {
     @ResponseBody
     public String getworkstatusdata()
     {
-        List<CountResult> list =userService.selectWorkStatus();
-        List<EchartResult> list1=new ArrayList<>();
+        List<CountResultDto> list =userService.selectWorkStatus();
+        List<EchartResultDto> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
         {
-            EchartResult result=new EchartResult();
+            EchartResultDto result=new EchartResultDto();
             result.setName(list.get(i).getField());
             result.setValue(list.get(i).getNum());
             list1.add(result);
@@ -191,11 +189,11 @@ public class UserController {
     @ResponseBody
     public String getagedata()
     {
-        List<CountResult> list =userService.selectAllages();
-        List<EchartResult> list1=new ArrayList<>();
+        List<CountResultDto> list =userService.selectAllages();
+        List<EchartResultDto> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
         {
-            EchartResult result=new EchartResult();
+            EchartResultDto result=new EchartResultDto();
             result.setName(list.get(i).getField());
             result.setValue(list.get(i).getNum());
             list1.add(result);
@@ -203,4 +201,6 @@ public class UserController {
         String data = JSON.toJSONString(list1);
         return data;
     }
+
+
 }

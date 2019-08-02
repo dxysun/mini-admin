@@ -1,11 +1,11 @@
 package com.netease.miniadmin.service;
 
-import com.netease.miniadmin.dto.CountResult;
-import com.netease.miniadmin.dto.EchartResult;
+import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.EchartResultDto;
 
 import java.util.List;
 
 public interface DynamicService {
-    List<CountResult> getDynamicsNum();
-    List<EchartResult> getDynamicDistribute();
+    List<CountResultDto> getDynamicsNum();
+    List<EchartResultDto> getDynamicDistribute();
 }

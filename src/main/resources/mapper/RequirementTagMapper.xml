@@ -149,7 +149,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectEveryRequireTagCount" resultType="com.netease.miniadmin.dto.CountResult">
+  <select id="selectEveryRequireTagCount" resultType="com.netease.miniadmin.dto.CountResultDto">
     select require_tag_name as field,count(*) as num from requirement_tag group by require_tag_name
   </select>
 </mapper>

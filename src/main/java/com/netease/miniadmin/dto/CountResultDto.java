@@ -3,17 +3,17 @@ package com.netease.miniadmin.dto;
 /**
  * 公用结果类，返回名称和数量
  */
-public class CountResult {
+public class CountResultDto {
     private String field;
     private Integer num;
 
 
-    public CountResult(String field, Integer num) {
+    public CountResultDto(String field, Integer num) {
         this.field = field;
         this.num = num;
     }
 
-    public CountResult() {
+    public CountResultDto() {
     }
 
     public String getField() {

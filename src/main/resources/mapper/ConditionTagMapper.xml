@@ -136,7 +136,7 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectEveryConditionTagCount" resultType="com.netease.miniadmin.dto.CountResult">
+  <select id="selectEveryConditionTagCount" resultType="com.netease.miniadmin.dto.CountResultDto">
     select condition_tag_name as field ,count(*) as num from condition_tag group by condition_tag_name
   </select>
 </mapper>

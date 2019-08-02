@@ -1,12 +1,11 @@
 package com.netease.miniadmin.service;
 
 import com.github.pagehelper.Page;
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.MatchResultDto;
 import com.netease.miniadmin.model.User;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
     Integer getUserCount();
@@ -16,20 +15,22 @@ public interface UserService {
     Integer selectByCity(String city);
 
     // 获取所有地区与人数的键值对
-    List<CountResult> selectAllCitys();
+    List<CountResultDto> selectAllCitys();
 
 
 
-    List<CountResult> selectAllages();
+    List<CountResultDto> selectAllages();
 
-    List<CountResult> selectAllGenders();
+    List<CountResultDto> selectAllGenders();
 
-    List<CountResult> selectWorkStatus();
+    List<CountResultDto> selectWorkStatus();
 
-    List<CountResult> selectGenderRatio();
+    List<CountResultDto> selectGenderRatio();
 
-    List<CountResult> selectWorkStatusRatio();
+    List<CountResultDto> selectWorkStatusRatio();
 
     Page<User> getAllUsers();
+
+    MatchResultDto getMatcherNumber(String openId);
 
 }

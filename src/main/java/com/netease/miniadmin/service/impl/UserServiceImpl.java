@@ -1,21 +1,31 @@
 package com.netease.miniadmin.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
-import com.netease.miniadmin.dto.CountResult;
+import com.netease.miniadmin.common.util.Constant;
+import com.netease.miniadmin.common.util.RedisUtil;
+import com.netease.miniadmin.dto.CountResultDto;
+import com.netease.miniadmin.dto.MatchResultDto;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
+import com.netease.miniadmin.model.param.MatchingResult;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 获取用户总数
@@ -37,7 +47,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectAllCitys() {
+    public List<CountResultDto> selectAllCitys() {
         return userMapper.selectAllCitys();
     }
 
@@ -47,15 +57,15 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectAllages() {
-        List<CountResult> list = userMapper.selectAllages();
-        List<CountResult> resultList = new ArrayList<CountResult>();
-        CountResult c1 = new CountResult("20岁以下",0);
-        CountResult c2 = new CountResult("20岁-24岁",0);
-        CountResult c3 = new CountResult("25岁-30岁",0);
-        CountResult c4 = new CountResult("30岁以上",0);
-        CountResult c5 = new CountResult("未设置年龄",0);
-        for (CountResult c : list) {
+    public List<CountResultDto> selectAllages() {
+        List<CountResultDto> list = userMapper.selectAllages();
+        List<CountResultDto> resultList = new ArrayList<CountResultDto>();
+        CountResultDto c1 = new CountResultDto("20岁以下",0);
+        CountResultDto c2 = new CountResultDto("20岁-24岁",0);
+        CountResultDto c3 = new CountResultDto("25岁-30岁",0);
+        CountResultDto c4 = new CountResultDto("30岁以上",0);
+        CountResultDto c5 = new CountResultDto("未设置年龄",0);
+        for (CountResultDto c : list) {
             if (c.getField() == null) {
                 c5.setNum(c5.getNum() + 1);
                 continue;
@@ -88,9 +98,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectAllGenders() {
-        List<CountResult> countResults = userMapper.selectAllGenders();
-        for (CountResult c : countResults) {
+    public List<CountResultDto> selectAllGenders() {
+        List<CountResultDto> countResultDtos = userMapper.selectAllGenders();
+        for (CountResultDto c : countResultDtos) {
             if (c.getField() == null) {
                 c.setField("未知");
                 continue;
@@ -100,7 +110,7 @@ public class UserServiceImpl implements UserService {
                 c.setField("女");
             }
         }
-        return countResults;
+        return countResultDtos;
     }
 
     /**
@@ -108,17 +118,17 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectGenderRatio() {
-        List<CountResult> countResults = selectAllGenders();
-        List<CountResult> resultList = new ArrayList<CountResult>();
-        CountResult boy = new CountResult();
+    public List<CountResultDto> selectGenderRatio() {
+        List<CountResultDto> countResultDtos = selectAllGenders();
+        List<CountResultDto> resultList = new ArrayList<CountResultDto>();
+        CountResultDto boy = new CountResultDto();
         boy.setField("男");
-        CountResult girl = new CountResult();
+        CountResultDto girl = new CountResultDto();
         girl.setField("女");
-        CountResult unknown = new CountResult();
+        CountResultDto unknown = new CountResultDto();
         unknown.setField("未知");
         int sum = getUserCount();
-        for (CountResult c : countResults) {
+        for (CountResultDto c : countResultDtos) {
             int ratio = c.getNum() * 100 / sum;
             if (c.getField().equals(boy.getField())) {
                 boy.setNum(ratio);
@@ -139,9 +149,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectWorkStatus() {
-        List<CountResult> countResults = userMapper.selectWorkStatus();
-        for (CountResult c : countResults) {
+    public List<CountResultDto> selectWorkStatus() {
+        List<CountResultDto> countResultDtos = userMapper.selectWorkStatus();
+        for (CountResultDto c : countResultDtos) {
             if (c.getField()==null) {
                 c.setField("未知");
             } else if (c.getField().equals("1")){
@@ -152,7 +162,7 @@ public class UserServiceImpl implements UserService {
                 c.setField("学生党");
             }
         }
-        return countResults;
+        return countResultDtos;
     }
 
     /**
@@ -160,15 +170,15 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<CountResult> selectWorkStatusRatio() {
-        List<CountResult> countResults = selectWorkStatus();
-        List<CountResult> resultList = new ArrayList<CountResult>();
-        CountResult worker = new CountResult();
+    public List<CountResultDto> selectWorkStatusRatio() {
+        List<CountResultDto> countResultDtos = selectWorkStatus();
+        List<CountResultDto> resultList = new ArrayList<CountResultDto>();
+        CountResultDto worker = new CountResultDto();
         worker.setField("工作党");
-        CountResult student = new CountResult();
+        CountResultDto student = new CountResultDto();
         student.setField("学生党");
         int sum = getUserCount();
-        for (CountResult c : countResults) {
+        for (CountResultDto c : countResultDtos) {
             int ratio = c.getNum() * 100 / sum;
             if (c.getField().equals(worker.getField())) {
                 worker.setNum(ratio);
@@ -183,5 +193,41 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<User> getAllUsers() {
         return userMapper.selectAllUser();
+    }
+
+
+    // 获取该用户匹配过 和匹配上的人数
+    @Override
+    public MatchResultDto getMatcherNumber(String openId) {
+        //redisUtil.set("qqqqqqqqqq","qqqqqwwwww");
+        //String object = (String) redisUtil.get("orq0K45uyGX-1QHmtvSyILiT-F6M");
+        MatchResultDto matchResultDto =new MatchResultDto(0,0);
+        int totalnumber = 0;
+        int matchnumber = 0;
+        String mapJsonString = (String) redisUtil.get("orq0K45uyGX-1QHmtvSyILiT-F6M");
+        JSONObject matchingResultMap = JSON.parseObject(mapJsonString);
+        Set<String> groupset = matchingResultMap.keySet();
+
+        for(String s:groupset)
+        {
+            System.out.println(s);
+            JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
+            System.out.println(matchingResultJsons);
+            for(int i=0;i<matchingResultJsons.size();i++)
+            {
+                JSONObject matchingResultJson =matchingResultJsons.getJSONObject(i);
+                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson,MatchingResult.class);
+                totalnumber++;
+                if(matchingResult.getMatchScore()> Constant.MATCHTHREHOLD)
+                {
+                    matchnumber++;
+                }
+            }
+        }
+        matchResultDto.setMatchNumber(matchnumber);
+        matchResultDto.setTotalNumber(totalnumber);
+        System.out.println("total="+totalnumber+"  match="+matchnumber);
+
+        return matchResultDto;
     }
 }
