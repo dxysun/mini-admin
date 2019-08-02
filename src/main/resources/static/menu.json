@@ -141,6 +141,20 @@
           "url": "./templates/echarts/echarts8.html"
         }
       ]
+    },
+    {
+      "id": 28,
+      "name": "用户反馈",
+      "icon": "&#xe726;",
+      "url": "",
+      "children": [
+        {
+          "id": 29,
+          "name": "所有反馈",
+          "icon": "",
+          "url": "/mini-love-admin/admin/userFeedback/getPageQueryInfo?pageNo=1&pageSize=10"
+        }
+      ]
     }
   ]
 }

@@ -153,7 +153,6 @@
   </update>
 
   <select id="pageQuery" parameterType="com.netease.miniadmin.model.PageQuery" resultMap="ResultMapWithBLOBs">
-      select * from user_feedback
-      limit #{currentIndex},#{pageSize}
+      select * from user_feedback where status = 0
   </select>
 </mapper>
