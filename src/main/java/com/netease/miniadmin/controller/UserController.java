@@ -45,16 +45,31 @@ public class UserController {
        return map;
    }
 
+    @GetMapping(value = "/topDynamicNumBar")
+    public String topDynamicNumBar()
+    {
+        return "/echarts/topdynamicbar";
+    }
     /**
      * 用于返回每个用户动态数目的接口
      * @author Xiang Jiangnan
      * @return
      */
-   @RequestMapping("/getDynamicsNum")
-    public List<CountResultDto> getDynamicsNum(){
-       List<CountResultDto> list = dynamicService.getDynamicsNum();
+//   @RequestMapping("/getDynamicsNum")
+//    public List<CountResultDto> getDynamicsNum() {
+//       List<CountResultDto> list = dynamicService.getDynamicsNum();
+//       if (!CollectionUtils.isEmpty(list)) {
+//           return list;
+//       }
+//       return null;
+//   }
+
+   @RequestMapping("/getTopFiveDynamicNum")
+   @ResponseBody
+    public String getTopFiveDynamicNum(){
+       List<EchartResultDto> list = dynamicService.getTopFiveDynamicNum();
        if(!CollectionUtils.isEmpty(list)){
-           return list;
+           return JSON.toJSONString(list);
        }
        return null;
    }

@@ -40,6 +40,11 @@ public class DBConfig {
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+
+        org.apache.ibatis.session.Configuration configuration =new org.apache.ibatis.session.Configuration();
+        configuration.setCallSettersOnNulls(true);
+        sqlSessionFactoryBean.setConfiguration(configuration);
+
         return sqlSessionFactoryBean.getObject();
     }
 

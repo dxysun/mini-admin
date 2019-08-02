@@ -4,12 +4,14 @@ import com.netease.miniadmin.common.Constant;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.mapper.DynamicsMapper;
+import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.service.DynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,6 +24,9 @@ import java.util.List;
 
      @Autowired
      private DynamicsMapper dynamicsMapper;
+
+     @Autowired
+     private UserMapper userMapper;
 
      /**
       * 此方法用于返回每个用户的日记数量
@@ -36,6 +41,39 @@ import java.util.List;
         return null;
     }
 
+    @Override
+    public List<EchartResultDto> getTopFiveDynamicNum(){
+        List<CountResultDto> list = getDynamicsNum();
+        if(!CollectionUtils.isEmpty(list)){
+            list.sort(new Comparator<CountResultDto>() {
+                @Override
+                public int compare(CountResultDto o1, CountResultDto o2) {
+                    return o1.getNum() >= o2.getNum() ? -1 : 1;
+                }
+            });
+            int length = 0;
+            List<String> openIdList = new ArrayList<>();
+            if(list.size() < Constant.DynamicDistribute.DYNAMICTOPNUM){
+                length = list.size();
+            }else{
+                length = Constant.DynamicDistribute.DYNAMICTOPNUM;
+            }
+            for(int i = 0; i < length; i++){
+                openIdList.add(list.get(i).getField());
+            }
+            List<String> nickNameList = userMapper.selectNickNameByOpenId(openIdList);
+            List<EchartResultDto> echartResultList = new ArrayList<>();
+            for(int i = 0; i < length; i++){
+                if(nickNameList.get(i) != null) {
+                    echartResultList.add(new EchartResultDto(nickNameList.get(i), list.get(i).getNum()));
+                }else{
+                    echartResultList.add(new EchartResultDto(Constant.DynamicDistribute.DEFAULTNICKNAME, list.get(i).getNum()));
+                }
+            }
+            return echartResultList;
+        }
+        return null;
+    }
     /**
      * 此方法用于统计不同日记区间的用户数，这里暂时将日记数量划分为5个区间，[0,5],[6,10],[10.20],[20,30]和>30
      * @return 返回不同日记区间的用户数的集合
