@@ -7,6 +7,6 @@ public class AdminController {
     @RequestMapping("/")
     public String hello()
     {
-        return "index";
+        return "login";
     }
 }
