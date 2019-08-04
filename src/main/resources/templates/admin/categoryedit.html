@@ -105,8 +105,6 @@
     function getInfo(){
         $.getJSON('/mini-love-admin/admin/tag/getTagById?id='+id,function(data){
             if(data.success){
-                alert(id);
-                alert("数据获取成功")
                 tag =data.tag;
                 $('#name').val(tag.tagName);
                 $(":radio[name='rd1'][value='" + tag.tagType + "']").prop("checked", "checked");
