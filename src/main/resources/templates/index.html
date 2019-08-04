@@ -73,7 +73,7 @@
 <script type="text/javascript">
 
 	layui.config({
-		base: '/mini-love-admin/js/'
+		base: '/miniloveadmin/js/'
 		// ,version: '101100'
 	}).extend({ //设定模块别名
 		admin: 'admin'
@@ -84,7 +84,7 @@
 				admin = layui.admin,
 				menu = layui.menu;
 		$(function(){
-			menu.getMenu('/mini-love-admin/menu.json');
+			menu.getMenu('/miniloveadmin/menu.json');
 			var login = JSON.parse(localStorage.getItem("login"));
 		});
 	});
