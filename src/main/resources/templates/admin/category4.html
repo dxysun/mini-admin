@@ -71,8 +71,8 @@
             <td th:if="${collect.tagClassify} eq 1 " >内在</td>
             <td th:if="${collect.tagClassify} eq 2 " >兴趣</td>
             <td th:if="${collect.tagClassify} eq 3 " >其他</td>
-            <td th:text="${#dates.format(collect.createTime, 'yyyy-MM-dd')}"></td>
-            <td th:text="${#dates.format(collect.modifyTime, 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(collect.createTime, 'yyyy-MM-dd hh:mm:ss')}"></td>
+            <td th:text="${#dates.format(collect.modifyTime, 'yyyy-MM-dd hh:mm:ss')}"></td>
             <td class="td-manage">
                 <!--<a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">-->
                     <!--<i class="layui-icon">&#xe601;</i>-->
