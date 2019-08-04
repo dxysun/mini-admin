@@ -217,7 +217,6 @@ public class UserServiceImpl implements UserService {
 
         for(String s:groupset)
         {
-            System.out.println(s);
             JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
             for(int i=0;i<matchingResultJsons.size();i++)
             {
