@@ -2,6 +2,9 @@ package com.netease.miniadmin.common;
 
 public class Constant {
     public static class DynamicDistribute {
+        public static final int DYNAMICTOPNUM = 5;
+        public static final String DEFAULTNICKNAME = "未知小可爱";
+
         public static final int DYNAMICSECTIONNUM = 5;
         public static final int DYNAMICNUMPOINT1 = 5;
         public static final int DYNAMICNUMPOINT2 = 10;

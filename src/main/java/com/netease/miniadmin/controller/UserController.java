@@ -8,6 +8,7 @@ import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.service.DynamicService;
+import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,10 @@ public class UserController {
     @Autowired
     private DynamicService dynamicService;
 
+
+    @Autowired
+    private GroupRelationService groupRelationService;
+
     @RequestMapping("/getUserCount")
     public Map<String,Object> getUserCount(){
        Map <String,Object> map = new HashMap<String, Object>();
@@ -40,16 +45,18 @@ public class UserController {
        return map;
    }
 
-    /**
-     * 用于返回每个用户动态数目的接口
-     * @author Xiang Jiangnan
-     * @return
-     */
-   @RequestMapping("/getDynamicsNum")
-    public List<CountResultDto> getDynamicsNum(){
-       List<CountResultDto> list = dynamicService.getDynamicsNum();
+    @GetMapping(value = "/topDynamicNumBar")
+    public String topDynamicNumBar()
+    {
+        return "/echarts/topdynamicbar";
+    }
+
+   @RequestMapping("/getTopFiveDynamicNum")
+   @ResponseBody
+    public String getTopFiveDynamicNum(){
+       List<EchartResultDto> list = dynamicService.getTopFiveDynamicNum();
        if(!CollectionUtils.isEmpty(list)){
-           return list;
+           return JSON.toJSONString(list);
        }
        return null;
    }
@@ -232,5 +239,20 @@ public class UserController {
         return map;
     }
 
+
+    @GetMapping(value = "/grouppie")
+    public String grouppie()
+    {
+        return "/echarts/groupchart";
+    }
+
+    @PostMapping(value = "/getgroupdata")
+    @ResponseBody
+    public String getgroupdata()
+    {
+        List<EchartResultDto> list =groupRelationService.getGroupNum();
+        String data = JSON.toJSONString(list);
+        return data;
+    }
 
 }
