@@ -284,6 +284,7 @@ public class UserController {
         int temp = superAdminService.loginCheck(admin);
         if(temp ==1){
             session.setAttribute("admin",admin);
+            System.out.println(request.getSession().getAttribute("admin"));
             return "redirect:/admin/user/index";
         }else{
             session.setAttribute("error_msg", "用户名或者密码错误！");
