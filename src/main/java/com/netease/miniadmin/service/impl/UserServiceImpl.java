@@ -91,11 +91,26 @@ public class UserServiceImpl implements UserService {
             }
 
         }
-        resultList.add(c1);
-        resultList.add(c2);
-        resultList.add(c3);
-        resultList.add(c4);
-        resultList.add(c5);
+        if(c1.getNum()!=0)
+        {
+            resultList.add(c1);
+        }
+        if(c2.getNum()!=0)
+        {
+            resultList.add(c2);
+        }
+        if(c3.getNum()!=0)
+        {
+            resultList.add(c3);
+        }
+        if(c4.getNum()!=0)
+        {
+            resultList.add(c4);
+        }
+        if(c5.getNum()!=0)
+        {
+            resultList.add(c5);
+        }
         return resultList;
     }
 
