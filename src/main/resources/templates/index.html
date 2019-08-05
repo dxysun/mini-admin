@@ -9,10 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
-	<link rel="stylesheet" th:href="@{/css/font.css}"/>
-	<link rel="stylesheet" th:href="@{/css/weadmin.css}"/>
-	<script type="text/javascript" th:src="@{/layui/layui.js}" charset="utf-8"></script>
-<!--	<script type="text/javascript" th:src="@{/js/admin.js}" charset="utf-8"></script>-->
+	<link rel="stylesheet" th:href="@{/static/css/font.css}"/>
+	<link rel="stylesheet" th:href="@{/static/css/weadmin.css}"/>
+	<script type="text/javascript" th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+<!--	<script type="text/javascript" th:src="@{/static/js/admin.js}" charset="utf-8"></script>-->
 
 </head>
 
@@ -73,19 +73,19 @@
 <script type="text/javascript">
 
 	layui.config({
-		base: '/miniloveadmin/js/'
+		base: '/miniloveadmin/static/js/'
 		// ,version: '101100'
 	}).extend({ //设定模块别名
-		admin: 'admin'
-		,menu: 'menu'
+		admin: 'admin',
+		menu: 'menu'
 	});
 	layui.use(['jquery', 'admin', 'menu'], function(){
 		var $ = layui.jquery,
 				admin = layui.admin,
 				menu = layui.menu;
 		$(function(){
-			menu.getMenu('/miniloveadmin/menu.json');
-			var login = JSON.parse(localStorage.getItem("login"));
+			menu.getMenu('/miniloveadmin/static/menu.json');
+			//var login = JSON.parse(localStorage.getItem("login"));
 		});
 	});
 

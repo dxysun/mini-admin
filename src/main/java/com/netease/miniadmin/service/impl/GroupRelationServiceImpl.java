@@ -40,7 +40,7 @@ public class GroupRelationServiceImpl implements GroupRelationService {
                 }
             }
             EchartResultDto result = new EchartResultDto();
-            result.setName(String.valueOf(i));
+            result.setName("参与匹配群的数量为"+i);
             result.setValue(t);
             resultList.add(result);
         }

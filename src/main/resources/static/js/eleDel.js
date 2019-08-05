@@ -9,7 +9,7 @@
  * +----------------------------------------------------------------------
  */
 layui.extend({
-	admin: '/miniloveadmin/js/admin'
+	admin: '/miniloveadmin/static/js/admin'
 });
 layui.use(['laydate', 'jquery', 'admin'], function() {
 	var laydate = layui.laydate,

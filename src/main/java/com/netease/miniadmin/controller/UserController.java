@@ -37,9 +37,6 @@ public class UserController {
 
     @Autowired
     private DynamicService dynamicService;
-    @Autowired
-    private SuperAdminService superAdminService;
-
 
     @Autowired
     private GroupRelationService groupRelationService;
@@ -276,20 +273,6 @@ public class UserController {
         return data;
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(HttpServletRequest request, HttpSession session){
-        String userName = request.getParameter("username");
-        String password = request.getParameter("password");
-        SuperAdmin admin = new SuperAdmin(userName,password);
-        int temp = superAdminService.loginCheck(admin);
-        if(temp ==1){
-            session.setAttribute("admin",admin);
-            System.out.println(request.getSession().getAttribute("admin"));
-            return "redirect:/admin/user/index";
-        }else{
-            session.setAttribute("error_msg", "用户名或者密码错误！");
-            return "redirect:/login";
-        }
-    }
+
 
 }
