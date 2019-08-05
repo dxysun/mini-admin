@@ -17,8 +17,13 @@ public class AdminController {
     private SuperAdminService superAdminService;
 
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String hello()
+    {
+        return "login";
+    }
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String sendLogin()
     {
         return "login";
     }

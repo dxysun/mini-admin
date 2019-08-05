@@ -26,6 +26,14 @@
                 <input type="text" id="name" name="name" required="" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>排序值
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="sort" name="sort" required="" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">
                 标签一级类型
@@ -107,6 +115,7 @@
             if(data.success){
                 tag =data.tag;
                 $('#name').val(tag.tagName);
+                $('#sort').val(tag.sort);
                 $(":radio[name='rd1'][value='" + tag.tagType + "']").prop("checked", "checked");
                 $(":radio[name='rd2'][value='" + tag.tagClassify + "']").prop("checked", "checked");
             }
@@ -118,6 +127,7 @@
             console.log(data);
             var newTag = {};
             newTag.id = tag.id;
+            newTag.sort = $('#sort').val();
             newTag.tagName = $('#name').val();
             newTag.tagClassify =  $("input[name='rd2']:checked").val();
             newTag.tagType = $("input[name='rd1']:checked").val();

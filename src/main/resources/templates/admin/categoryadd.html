@@ -26,6 +26,14 @@
                 <input type="text" id="name" name="name" required="" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>排序值
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="sort" name="sort" required="" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">
                 标签一级类型
@@ -110,6 +118,7 @@
             console.log(data);
             var tag = {};
             tag.tagName = $('#name').val();
+            tag.sort=$('#sort').val();
             tag.tagClassify =  $("input[name='rd2']:checked").val();
             tag.tagType = $("input[name='rd1']:checked").val();
             var formData = new FormData();
