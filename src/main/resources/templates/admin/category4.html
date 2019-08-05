@@ -58,6 +58,7 @@
             <th>标签类型</th>
             <th>创建时间</th>
             <th>修改时间</th>
+            <th>排序值</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -73,6 +74,7 @@
             <td th:if="${collect.tagClassify} eq 3 " >其他</td>
             <td th:text="${#dates.format(collect.createTime, 'yyyy-MM-dd hh:mm:ss')}"></td>
             <td th:text="${#dates.format(collect.modifyTime, 'yyyy-MM-dd hh:mm:ss')}"></td>
+            <td th:text="${collect.sort}">Mark</td>
             <td class="td-manage">
                 <!--<a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">-->
                     <!--<i class="layui-icon">&#xe601;</i>-->
