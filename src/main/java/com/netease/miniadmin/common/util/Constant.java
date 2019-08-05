@@ -73,6 +73,6 @@ public class Constant {
     //默认的模板群组id
     public static final String DEFAULTGROUPID ="DEFAULTGROUPID";
 
-    public static final Integer MATCHTHREHOLD=40;
+    public static final Integer MATCHTHREHOLD=60;
 
 }

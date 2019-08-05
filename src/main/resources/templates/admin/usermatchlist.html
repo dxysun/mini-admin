@@ -44,7 +44,7 @@
     <!--</div>-->
     <div class="weadmin-block">
 
-        <!--<span class="fr" style="line-height:40px">共有数据： 条</span>-->
+        <span class="fr" style="line-height:40px">共有数据：<span th:text="${matchList.total}"></span> 条</span>
     </div>
     <table class="layui-table">
         <thead>
@@ -61,7 +61,7 @@
         <tbody>
         <tr>
 
-        <tr  th:each="collect,iterStat : ${matchList}">
+        <tr  th:each="collect,iterStat : ${matchList.list}">
             <th scope="row" th:text="${collect.id}">1</th>
             <td th:text="${collect.openId}">Mark</td>
             <td th:text="${collect.nickName}">Mark</td>
@@ -94,15 +94,15 @@
 
         </tbody>
     </table>
-    <!--<div class="page">-->
-        <!--<div>-->
-            <!--<a class="prev" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.prePage}+'&pageSize=6'}">&lt;&lt;</a>-->
-            <!--<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo=1&pageSize=6'}">1</a>-->
-            <!--<span class="current"><span th:text="${userList.prePage+1}"></span></span>-->
-            <!--<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.pages}+'&pageSize=6'}" th:text="${userList.pages}" ></a>-->
-            <!--<a class="next" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.nextPage}+'&pageSize=6'}">&gt;&gt;</a>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="page">
+        <div>
+            <a class="prev" th:href="@{'/admin/user/getUserMatchInfo?pageNo='+${matchList.prePage}+'&pageSize=10'}">&lt;&lt;</a>
+            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageNo=1&pageSize=10'}">1</a>
+            <span class="current"><span th:text="${matchList.prePage+1}"></span></span>
+            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageNo='+${matchList.pages}+'&pageSize=10'}" th:text="${matchList.pages}" ></a>
+            <a class="next" th:href="@{'/admin/user/getUserMatchInfo?pageNo='+${matchList.nextPage}+'&pageSize=10'}">&gt;&gt;</a>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" charset="utf-8" th:src="@{/layui/layui.js}" ></script>
 <script type="text/javascript" charset="utf-8" th:src="@{/js/eleDel.js}"></script>

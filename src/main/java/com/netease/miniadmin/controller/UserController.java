@@ -7,6 +7,7 @@ import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.User;
+import com.netease.miniadmin.model.UserFeedback;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.UserService;
@@ -107,12 +108,22 @@ public class UserController {
     }
 
     @RequestMapping("/getUserMatchInfo")
-    public ModelAndView getUserMatchInfo(){
+    public ModelAndView getUserMatchInfo(@RequestParam(defaultValue = "1") Integer pageNo,@RequestParam(defaultValue = "10") Integer pageSize){
+        PageHelper.startPage(pageNo,pageSize);
         ModelAndView modelAndView = new ModelAndView();
-        List<UserMatchDto> userMatchDtoList = userService.getUserMatch();
-        modelAndView.addObject("matchList",userMatchDtoList);
         modelAndView.setViewName("admin/usermatchlist");
-        return modelAndView;
+        try{
+            PageInfo<UserMatchDto> pageInfo = new PageInfo<>(userService.getUserMatch());
+            if (pageInfo.getList().size() == 0 || pageInfo.getList() == null){
+                return modelAndView;
+            }else{
+                modelAndView.addObject("matchList",pageInfo);
+                return modelAndView;
+            }
+        }catch (Exception e){
+            return modelAndView;
+
+        }
     }
 
     @GetMapping("/index")
