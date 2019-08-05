@@ -48,7 +48,7 @@ public class UserController {
     @GetMapping(value = "/topDynamicNumBar")
     public String topDynamicNumBar()
     {
-        return "/echarts/topdynamicbar";
+        return "echarts/topdynamicbar";
     }
 
    @RequestMapping("/getTopFiveDynamicNum")
@@ -80,7 +80,7 @@ public class UserController {
     @GetMapping(value = "/dynamicDistributeBar")
     public String dynamicDistributeBar()
     {
-        return "/echarts/dynamicbar";
+        return "echarts/dynamicbar";
     }
 
     /**
@@ -130,7 +130,7 @@ public class UserController {
     @GetMapping(value = "/genderpie")
     public String genderpie()
     {
-        return "/echarts/genderchart";
+        return "echarts/genderchart";
     }
 
     @PostMapping(value = "/getgenderdata")
@@ -153,7 +153,7 @@ public class UserController {
     @GetMapping(value = "/locationpie")
     public String locationpie()
     {
-        return "/echarts/locationchart";
+        return "echarts/locationchart";
     }
 
     @PostMapping(value = "/getlocationdata")
@@ -176,7 +176,7 @@ public class UserController {
     @GetMapping(value = "/workstatuspie")
     public String workstatuspie()
     {
-        return "/echarts/workstatuschart";
+        return "echarts/workstatuschart";
     }
 
 
@@ -199,7 +199,7 @@ public class UserController {
     @GetMapping(value = "/agepie")
     public String agepie()
     {
-        return "/echarts/agechart";
+        return "echarts/agechart";
     }
 
     @PostMapping(value = "/getagedata")
@@ -243,7 +243,7 @@ public class UserController {
     @GetMapping(value = "/grouppie")
     public String grouppie()
     {
-        return "/echarts/groupchart";
+        return "echarts/groupchart";
     }
 
     @PostMapping(value = "/getgroupdata")
