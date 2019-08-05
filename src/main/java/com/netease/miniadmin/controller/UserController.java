@@ -11,6 +11,7 @@ import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserFeedback;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.GroupRelationService;
+import com.netease.miniadmin.service.SuperAdminService;
 import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,8 @@ public class UserController {
 
     @Autowired
     private DynamicService dynamicService;
+    @Autowired
+    private SuperAdminService superAdminService;
 
 
     @Autowired
@@ -278,9 +281,8 @@ public class UserController {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         SuperAdmin admin = new SuperAdmin(userName,password);
-        int temp = 0;
-        // TODO: 2019/8/5 调用数据库查询
-        if(temp !=-1){
+        int temp = superAdminService.loginCheck(admin);
+        if(temp ==1){
             session.setAttribute("admin",admin);
             return "redirect:/admin/user/index";
         }else{
