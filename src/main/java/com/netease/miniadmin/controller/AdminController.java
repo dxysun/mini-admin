@@ -35,7 +35,7 @@ public class AdminController {
         String password = request.getParameter("password");
         SuperAdmin admin = new SuperAdmin(userName,password);
         int temp = superAdminService.loginCheck(admin);
-        if(temp ==1){
+        if(temp == 1){
             session.setAttribute("admin",admin);
             return "redirect:/admin/user/index";
         }else{
