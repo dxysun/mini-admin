@@ -103,7 +103,7 @@
             $ = layui.jquery;
 
     function getInfo(){
-        $.getJSON('/mini-love-admin/admin/tag/getTagById?id='+id,function(data){
+        $.getJSON('/miniloveadmin/admin/tag/getTagById?id='+id,function(data){
             if(data.success){
                 tag =data.tag;
                 $('#name').val(tag.tagName);
@@ -124,7 +124,7 @@
             var formData = new FormData();
             formData.append('tagStr', JSON.stringify(newTag));
             $.ajax({
-                url : "/mini-love-admin/admin/tag/updateTag",
+                url : "/miniloveadmin/admin/tag/updateTag",
                 type : 'post',
                 data : formData,
                 contentType : false,

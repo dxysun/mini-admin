@@ -9,7 +9,7 @@
  * +----------------------------------------------------------------------
  */
 layui.extend({
-	admin: '/mini-love-admin/js/admin'
+	admin: '/miniloveadmin/js/admin'
 });
 layui.use(['laydate', 'jquery', 'admin'], function() {
 	var laydate = layui.laydate,
@@ -56,7 +56,7 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		layer.confirm('确认要删除吗？', function(index) {
 			//发异步删除数据
 			$.ajax({
-				url : "/mini-love-admin/admin/tag/deleteTag",
+				url : "/miniloveadmin/admin/tag/deleteTag",
 				type :'POST',
 				data :{
 					"id": id
@@ -79,7 +79,7 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		layer.confirm('确认要删除吗？', function(index) {
 			//发异步删除数据
 			$.ajax({
-				url : "/mini-love-admin/admin/user/deleteUser",
+				url : "/miniloveadmin/admin/user/deleteUser",
 				type :'POST',
 				data :{
 					"id": id
@@ -102,7 +102,7 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 		layer.confirm('确认要删除反馈吗？', function(index) {
 			//发异步删除数据
 			$.ajax({
-				url : "/mini-love-admin/admin/userFeedback/deleteById",
+				url : "/miniloveadmin/admin/userFeedback/deleteById",
 				type :'POST',
 				data :{
 					"id": id
