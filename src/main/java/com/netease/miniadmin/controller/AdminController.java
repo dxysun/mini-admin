@@ -18,12 +18,13 @@ public class AdminController {
 
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String hello()
+    public String index()
     {
         return "login";
     }
+
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String sendLogin()
+    public String hello()
     {
         return "login";
     }
