@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
+import com.netease.miniadmin.model.SuperAdmin;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserFeedback;
 import com.netease.miniadmin.service.DynamicService;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -257,6 +261,9 @@ public class UserController {
         return "echarts/groupchart";
     }
 
+//    @GetMapping(value = "/login")
+//    public String login(){return "login";}
+
     @PostMapping(value = "/getgroupdata")
     @ResponseBody
     public String getgroupdata()
@@ -264,6 +271,22 @@ public class UserController {
         List<EchartResultDto> list =groupRelationService.getGroupNum();
         String data = JSON.toJSONString(list);
         return data;
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(HttpServletRequest request, HttpSession session){
+        String userName = request.getParameter("username");
+        String password = request.getParameter("password");
+        SuperAdmin admin = new SuperAdmin(userName,password);
+        int temp = 0;
+        // TODO: 2019/8/5 调用数据库查询
+        if(temp !=-1){
+            session.setAttribute("admin",admin);
+            return "redirect:/admin/user/index";
+        }else{
+            session.setAttribute("error_msg", "用户名或者密码错误！");
+            return "redirect:/login";
+        }
     }
 
 }
