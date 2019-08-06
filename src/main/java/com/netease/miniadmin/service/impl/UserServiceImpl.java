@@ -17,6 +17,7 @@ import com.netease.miniadmin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -91,24 +92,19 @@ public class UserServiceImpl implements UserService {
             }
 
         }
-        if(c1.getNum()!=0)
-        {
+        if (c1.getNum() != 0) {
             resultList.add(c1);
         }
-        if(c2.getNum()!=0)
-        {
+        if (c2.getNum() != 0) {
             resultList.add(c2);
         }
-        if(c3.getNum()!=0)
-        {
+        if (c3.getNum() != 0) {
             resultList.add(c3);
         }
-        if(c4.getNum()!=0)
-        {
+        if (c4.getNum() != 0) {
             resultList.add(c4);
         }
-        if(c5.getNum()!=0)
-        {
+        if (c5.getNum() != 0) {
             resultList.add(c5);
         }
         return resultList;
@@ -169,6 +165,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党和工作党人数
+     *
      * @return
      */
     @Override
@@ -188,6 +185,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 返回学生党，工作党人数比例
+     *
      * @return
      */
     @Override
@@ -230,16 +228,13 @@ public class UserServiceImpl implements UserService {
         JSONObject matchingResultMap = JSON.parseObject(mapJsonString);
         Set<String> groupset = matchingResultMap.keySet();
 
-        for(String s:groupset)
-        {
+        for (String s : groupset) {
             JSONArray matchingResultJsons = (JSONArray) matchingResultMap.get(s);
-            for(int i=0;i<matchingResultJsons.size();i++)
-            {
-                JSONObject matchingResultJson =matchingResultJsons.getJSONObject(i);
-                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson,MatchingResult.class);
+            for (int i = 0; i < matchingResultJsons.size(); i++) {
+                JSONObject matchingResultJson = matchingResultJsons.getJSONObject(i);
+                MatchingResult matchingResult = JSONObject.toJavaObject(matchingResultJson, MatchingResult.class);
                 totalnumber++;
-                if(matchingResult.getMatchScore()> Constant.MATCHTHREHOLD)
-                {
+                if (matchingResult.getMatchScore() > Constant.MATCHTHREHOLD) {
                     matchnumber++;
                 }
             }
@@ -252,27 +247,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserMatchDto> getUserMatch() {
-        List<User> userList = userMapper.selectAllUser();
+        List<User> userList = userMapper.selectAllUserInfo();
         List<UserMatchDto> userMatchDtoList = new ArrayList<>();
         List<CountResultDto> countResultDtoList = dynamicService.getDynamicsNum();
         for (int i = 0; i < userList.size(); i++) {
             UserMatchDto userMatchDto = new UserMatchDto();
             userMatchDto.setId(userList.get(i).getId());
             userMatchDto.setOpenId(userMapper.selectOpenIdById(userList.get(i).getId()));
-            for(int j=0;j<countResultDtoList.size();j++){
-                if(countResultDtoList.get(j).getField().equals(userMatchDto.getOpenId())){
+            for (int j = 0; j < countResultDtoList.size(); j++) {
+                if (countResultDtoList.get(j).getField().equals(userMatchDto.getOpenId())) {
                     userMatchDto.setDynamicCount(countResultDtoList.get(j).getNum());
                 }
             }
             userMatchDto.setNickName(userList.get(i).getNickName());
             MatchResultDto matchResultDto = getMatcherNumber(userMatchDto.getOpenId());
             userMatchDto.setMatchResultDto(matchResultDto);
-            double matchRatio = (double)matchResultDto.getMatchNumber()/matchResultDto.getTotalNumber();
-            if(matchResultDto.getTotalNumber()==0){
-                matchRatio = 0;
+            String matchRatio = "";
+            if (matchResultDto.getTotalNumber() == 0) {
+                matchRatio = "0.00";
+                userMatchDto.setMatchRatio(matchRatio);
+                userMatchDtoList.add(userMatchDto);
+            } else {
+                DecimalFormat df = new DecimalFormat("0.00");//格式化小数
+                matchRatio = df.format((float) matchResultDto.getMatchNumber() / matchResultDto.getTotalNumber());
+                userMatchDto.setMatchRatio(matchRatio);
+                userMatchDtoList.add(userMatchDto);
             }
-            userMatchDto.setMatchRatio(matchRatio);
-            userMatchDtoList.add(userMatchDto);
         }
         return userMatchDtoList;
 

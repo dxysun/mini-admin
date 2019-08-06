@@ -112,21 +112,27 @@ public class UserController {
     }
 
     @RequestMapping("/getUserMatchInfo")
-    public ModelAndView getUserMatchInfo(@RequestParam(defaultValue = "1") Integer pageNo,@RequestParam(defaultValue = "10") Integer pageSize){
-        PageHelper.startPage(pageNo,pageSize);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/usermatchlist");
+    public ModelAndView getUserMatchInfo(){
+       ModelAndView modelAndView = new ModelAndView();
+       modelAndView.setViewName("admin/usermatchlist");
+//        try{
+//            PageInfo<UserMatchDto> pageInfo = new PageInfo<>(userService.getUserMatch());
+//            if (pageInfo.getList().size() == 0 || pageInfo.getList() == null){
+//                return modelAndView;
+//            }else{
+//                modelAndView.addObject("matchList",pageInfo);
+//                return modelAndView;
+//            }
+//        }catch (Exception e){
+//            return modelAndView;
+//
+//        }
         try{
-            PageInfo<UserMatchDto> pageInfo = new PageInfo<>(userService.getUserMatch());
-            if (pageInfo.getList().size() == 0 || pageInfo.getList() == null){
-                return modelAndView;
-            }else{
-                modelAndView.addObject("matchList",pageInfo);
-                return modelAndView;
-            }
+            List<UserMatchDto> userMatchDtoList = userService.getUserMatch();
+            modelAndView.addObject("matchList",userMatchDtoList);
+            return modelAndView;
         }catch (Exception e){
             return modelAndView;
-
         }
     }
 

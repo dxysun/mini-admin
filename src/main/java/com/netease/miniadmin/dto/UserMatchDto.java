@@ -5,7 +5,7 @@ public class UserMatchDto {
     String openId;
     String nickName;
     MatchResultDto matchResultDto;
-    Double matchRatio;
+    String matchRatio;
     Integer dynamicCount;
 
     public Integer getDynamicCount() {
@@ -16,11 +16,11 @@ public class UserMatchDto {
         this.dynamicCount = dynamicCount;
     }
 
-    public Double getMatchRatio() {
+    public String getMatchRatio() {
         return matchRatio;
     }
 
-    public void setMatchRatio(Double matchRatio) {
+    public void setMatchRatio(String matchRatio) {
         this.matchRatio = matchRatio;
     }
 

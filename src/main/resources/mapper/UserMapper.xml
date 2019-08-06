@@ -64,6 +64,12 @@
     from user
   </select>
 
+  <select id="selectAllUserInfo" resultMap="ResultMapWithBLOBs">
+    select
+    *
+    from user
+  </select>
+
   <select id="selectByCity" resultType="Integer">
     select count(*) from user where city= #{city}
   </select>
