@@ -12,14 +12,16 @@ import java.util.List;
 
 @Service
 public class GroupRelationServiceImpl implements GroupRelationService {
+
     @Autowired
     private GroupRelationMapper groupRelationMapper;
 
-    @Override
+
     /**
      * 返回统计分布，参与一个群的有几个，两个群的有几个，参与n个群的有几个
      * author cuiyang
      */
+    @Override
     public List<EchartResultDto> getGroupNum() {
         List<CountResultDto> list = groupRelationMapper.getUserMathchGroupNum();
 

@@ -269,8 +269,7 @@ public class UserController {
     public String getgroupdata()
     {
         List<EchartResultDto> list =groupRelationService.getGroupNum();
-        String data = JSON.toJSONString(list);
-        return data;
+        return JSON.toJSONString(list);
     }
 
 
