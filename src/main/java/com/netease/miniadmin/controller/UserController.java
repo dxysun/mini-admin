@@ -13,6 +13,7 @@ import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.SuperAdminService;
 import com.netease.miniadmin.service.UserService;
+import com.netease.miniadmin.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -112,9 +113,11 @@ public class UserController {
     }
 
     @RequestMapping("/getUserMatchInfo")
-    public ModelAndView getUserMatchInfo(){
+    public ModelAndView getUserMatchInfo(HttpServletRequest request){
        ModelAndView modelAndView = new ModelAndView();
        modelAndView.setViewName("admin/usermatchlist");
+        int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
+        int pageSize = HttpServletRequestUtil.getInt(request, "pageSize");
 //        try{
 //            PageInfo<UserMatchDto> pageInfo = new PageInfo<>(userService.getUserMatch());
 //            if (pageInfo.getList().size() == 0 || pageInfo.getList() == null){
@@ -128,8 +131,18 @@ public class UserController {
 //
 //        }
         try{
-            List<UserMatchDto> userMatchDtoList = userService.getUserMatch();
+            List<UserMatchDto> userMatchDtoList = userService.getUserMatch(pageIndex,pageSize);
+            int count = userService.getUserCount();
+            int pages = count/pageSize+1;
+            int prePage = pageIndex==1?1:pageIndex-1;
+            int nextPage = pageIndex==pages?pages:pageIndex+1;
             modelAndView.addObject("matchList",userMatchDtoList);
+            modelAndView.addObject("pages",pages);
+            modelAndView.addObject("total",count);
+            modelAndView.addObject("currentPage",pageIndex);
+            modelAndView.addObject("prePage",prePage);
+            modelAndView.addObject("nextPage",nextPage);
+
             return modelAndView;
         }catch (Exception e){
             return modelAndView;

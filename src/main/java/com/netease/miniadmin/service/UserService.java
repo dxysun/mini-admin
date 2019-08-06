@@ -34,7 +34,7 @@ public interface UserService {
 
     MatchResultDto getMatcherNumber(String openId);
 
-    List<UserMatchDto> getUserMatch();
+    List<UserMatchDto> getUserMatch(int pageIndex, int pageSize);
 
     int deleteUser(Integer id);
 

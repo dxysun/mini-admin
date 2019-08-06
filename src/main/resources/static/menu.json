@@ -18,7 +18,7 @@
           "id": 2,
           "name": "用户匹配动态统计",
           "icon": "",
-          "url": "/miniloveadmin/admin/user/getUserMatchInfo"
+          "url": "/miniloveadmin/admin/user/getUserMatchInfo?pageIndex=1&pageSize=10"
         }
       ]
     },

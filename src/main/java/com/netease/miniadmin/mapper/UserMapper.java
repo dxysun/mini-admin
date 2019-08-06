@@ -90,7 +90,8 @@ public interface UserMapper {
 
     List<String> selectNickNameByOpenId(@Param("list")List<String> list);
 
-    List<User> selectAllUserInfo();
+    List<User> selectAllUserInfo(@Param("rowIndex") int rowIndex,
+                                 @Param("pageSize") int pageSize);
 
 
 }
