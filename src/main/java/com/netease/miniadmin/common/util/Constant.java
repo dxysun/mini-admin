@@ -75,4 +75,6 @@ public class Constant {
 
     public static final Integer MATCHTHREHOLD=60;
 
+    public static final String REDIS_DETAIL_GROUP_RESULT = "detailGroupResult";
+
 }
