@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.netease.miniadmin.common.util.Constant.REDIS_DETAIL_GROUP_RESULT;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -222,7 +224,7 @@ public class UserServiceImpl implements UserService {
         MatchResultDto matchResultDto = new MatchResultDto(0, 0);
         int totalnumber = 0;
         int matchnumber = 0;
-        String mapJsonString = (String) redisUtil.get(openId);
+        String mapJsonString = (String) redisUtil.hget(REDIS_DETAIL_GROUP_RESULT,openId);
         if (mapJsonString == null) {
             return matchResultDto;
         }
