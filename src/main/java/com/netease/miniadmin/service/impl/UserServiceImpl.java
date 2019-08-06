@@ -14,6 +14,7 @@ import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.param.MatchingResult;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
+import com.netease.miniadmin.util.PageCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -246,8 +247,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserMatchDto> getUserMatch() {
-        List<User> userList = userMapper.selectAllUserInfo();
+    public List<UserMatchDto> getUserMatch(int pageIndex, int pageSize) {
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex,pageSize);
+        List<User> userList = userMapper.selectAllUserInfo(rowIndex,pageSize);
         List<UserMatchDto> userMatchDtoList = new ArrayList<>();
         List<CountResultDto> countResultDtoList = dynamicService.getDynamicsNum();
         for (int i = 0; i < userList.size(); i++) {
