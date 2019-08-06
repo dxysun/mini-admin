@@ -47,12 +47,12 @@ public class TagController {
     }
     @RequestMapping("/sendAddCategory")
     public String sendAddCategory(){
-        return "/admin/categoryadd";
+        return "admin/categoryadd";
     }
 
     @RequestMapping("/sendEditCategory")
     public String sendEditCategory(HttpServletRequest request){
-        return "/admin/categoryedit";
+        return "admin/categoryedit";
     }
 
 
