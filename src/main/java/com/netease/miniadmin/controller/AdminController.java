@@ -17,28 +17,26 @@ public class AdminController {
     private SuperAdminService superAdminService;
 
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index()
-    {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String hello()
-    {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String hello() {
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(HttpServletRequest request, HttpSession session){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(HttpServletRequest request, HttpSession session) {
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
-        SuperAdmin admin = new SuperAdmin(userName,password);
+        SuperAdmin admin = new SuperAdmin(userName, password);
         int temp = superAdminService.loginCheck(admin);
-        if(temp ==1){
-            session.setAttribute("admin",admin);
+        if (temp == 1) {
+            session.setAttribute("admin", admin);
             return "redirect:/admin/user/index";
-        }else{
+        } else {
             session.setAttribute("error_msg", "用户名或者密码错误！");
             return "redirect:/login";
         }
