@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -288,7 +289,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getWeekAddNum(){
-        return userMapper.selectWeekAddNum();
+    public List<Integer> getWeekNum(){
+        List<Integer> res =new ArrayList<>();
+        for(int i=1; i < 8; i++)
+        {
+            Integer number = userMapper.selectWeekNum(i);
+            res.add(number);
+        }
+        return res;
     }
 }

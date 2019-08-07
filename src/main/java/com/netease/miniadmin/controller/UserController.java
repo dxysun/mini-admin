@@ -1,6 +1,7 @@
 package com.netease.miniadmin.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.netease.miniadmin.dto.CountResultDto;
@@ -292,10 +293,12 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/getWeekAddNum")
+    @GetMapping(value = "/getWeekNum")
     @ResponseBody
-    public int getWeekAddNum(){
-        int num = userService.getWeekAddNum();
-        return num;
+    public JSONObject getWeekNum(){
+        JSONObject jsonObject = new JSONObject();
+        List<Integer> week = userService.getWeekNum();
+        jsonObject.put("week", week);
+        return jsonObject;
     }
 }
