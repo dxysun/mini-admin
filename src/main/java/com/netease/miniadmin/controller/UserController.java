@@ -292,5 +292,10 @@ public class UserController {
     }
 
 
-
+    @GetMapping(value = "/getWeekAddNum")
+    @ResponseBody
+    public int getWeekAddNum(){
+        int num = userService.getWeekAddNum();
+        return num;
+    }
 }

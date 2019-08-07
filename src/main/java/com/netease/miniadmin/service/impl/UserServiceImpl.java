@@ -286,4 +286,9 @@ public class UserServiceImpl implements UserService {
     public int deleteUser(Integer id) {
         return userMapper.deleteUserById(id);
     }
+
+    @Override
+    public int getWeekAddNum(){
+        return userMapper.selectWeekAddNum();
+    }
 }

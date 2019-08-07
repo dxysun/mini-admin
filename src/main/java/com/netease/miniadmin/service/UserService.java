@@ -38,5 +38,5 @@ public interface UserService {
 
     int deleteUser(Integer id);
 
-
+    int getWeekAddNum();
 }
