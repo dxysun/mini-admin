@@ -77,4 +77,6 @@ public class Constant {
 
     public static final String REDIS_DETAIL_GROUP_RESULT = "detailGroupResult";
 
+
+
 }

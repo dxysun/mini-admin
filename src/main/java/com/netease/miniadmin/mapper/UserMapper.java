@@ -93,5 +93,5 @@ public interface UserMapper {
     List<User> selectAllUserInfo(@Param("rowIndex") int rowIndex,
                                  @Param("pageSize") int pageSize);
 
-    int selectWeekAddNum();
+    int selectWeekNum(String mydate);
 }

@@ -93,8 +93,8 @@
             #{openid}
         </foreach>
     </select>
-    <select id="selectWeekAddNum" resultType="int">
-      select count(*) from user where date_sub(CURDATE(),INTERVAL 7 DAY) &lt;= DATE(create_time)
+    <select id="selectWeekNum" resultType="int" >
+      select count(*) from user where create_time between '2018-01-21 10:20:09' and #{mydate}
     </select>
     <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="com.netease.miniadmin.model.UserKey">
         <!--

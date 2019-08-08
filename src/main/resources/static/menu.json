@@ -101,6 +101,12 @@
           "name": "群饼图",
           "icon": "",
           "url": "/miniloveadmin/admin/user/grouppie"
+        },
+        {
+          "id": 26,
+          "name": "增长曲线图",
+          "icon": "",
+          "url": "/miniloveadmin/admin/user/zengZhangLine"
         }
       ]
     },
