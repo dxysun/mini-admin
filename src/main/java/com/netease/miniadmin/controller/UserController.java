@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.netease.miniadmin.common.util.AjaxObject;
+import com.netease.miniadmin.common.util.Result;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.EchartResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.SuperAdmin;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserFeedback;
+import com.netease.miniadmin.model.UserStatistics;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.GroupRelationService;
 import com.netease.miniadmin.service.SuperAdminService;
@@ -307,4 +310,34 @@ public class UserController {
     {
         return "echarts/zengzhangchart";
     }
+
+    /**
+     * 获取每个城市用户数
+     * @author xiabin
+     * @return
+     */
+    @GetMapping(value = "/getCityUserNum")
+    @ResponseBody
+    public String selectUserNumByCity() {
+        List<UserStatistics> userStatistics = new ArrayList<>();
+        try {
+            userStatistics = userService.selectUserNumByCity();
+            if (userStatistics == null || userStatistics.size() == 0){
+                AjaxObject.error("获取城市用户数失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            AjaxObject.error("获取每个城市用户数发生异常");
+        }
+
+        return JSON.toJSONString(userStatistics);
+    }
+
+
+    @GetMapping(value = "/getCityUser")
+    public String getCityUser()
+    {
+        return "echarts/mapecharts";
+    }
+
 }

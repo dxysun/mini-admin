@@ -11,6 +11,7 @@ import com.netease.miniadmin.dto.MatchResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
+import com.netease.miniadmin.model.UserStatistics;
 import com.netease.miniadmin.model.param.MatchingResult;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
@@ -303,5 +304,14 @@ public class UserServiceImpl implements UserService {
             res.add(number);
         }
         return res;
+    }
+
+    /**
+     * 按照地区统计用户数
+     * @return
+     */
+    @Override
+    public List<UserStatistics> selectUserNumByCity() {
+        return userMapper.selectUserNumByCity();
     }
 }
