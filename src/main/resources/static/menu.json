@@ -12,7 +12,7 @@
           "id": 2,
           "name": "用户列表",
           "icon": "",
-          "url": "/miniloveadmin/admin/user/getAllUserInfo?pageNo=1&pageSize=6"
+          "url": "/miniloveadmin/admin/user/getAllUserInfo?pageNo=1&pageSize=20"
         },
         {
           "id": 2,

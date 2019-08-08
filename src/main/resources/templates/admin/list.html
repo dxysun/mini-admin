@@ -105,11 +105,11 @@
 			</table>
 			<div class="page">
 				<div>
-					<a class="prev" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.prePage}+'&pageSize=6'}">&lt;&lt;</a>
-					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo=1&pageSize=6'}">1</a>
+					<a class="prev" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.prePage}+'&pageSize=20'}">&lt;&lt;</a>
+					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo=1&pageSize=20'}">1</a>
 					<span class="current"><span th:text="${userList.prePage+1}"></span></span>
-					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.pages}+'&pageSize=6'}" th:text="${userList.pages}" ></a>
-					<a class="next" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.nextPage}+'&pageSize=6'}">&gt;&gt;</a>
+					<a class="num" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.pages}+'&pageSize=20'}" th:text="${userList.pages}" ></a>
+					<a class="next" th:href="@{'/admin/user/getAllUserInfo?pageNo='+${userList.nextPage}+'&pageSize=20'}">&gt;&gt;</a>
 				</div>
 			</div>
 		</div>
