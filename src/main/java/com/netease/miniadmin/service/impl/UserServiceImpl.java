@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -291,9 +292,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Integer> getWeekNum(){
         List<Integer> res =new ArrayList<>();
-        for(int i=1; i < 8; i++)
+        for(int i=6; i>=0; i--)
         {
-            Integer number = userMapper.selectWeekNum(i);
+            Date date =new Date(System.currentTimeMillis()-1000*60*60*24*i);
+            SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = dateFormat.format(date.getTime());
+            System.out.println(time);
+            Integer number = userMapper.selectWeekNum(time);
+            System.out.println("number = "+number);
             res.add(number);
         }
         return res;

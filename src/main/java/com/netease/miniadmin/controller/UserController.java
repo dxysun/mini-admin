@@ -293,12 +293,18 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/getWeekNum")
+    @PostMapping(value = "/getWeekNum")
     @ResponseBody
-    public JSONObject getWeekNum(){
+    public String getWeekNum(){
         JSONObject jsonObject = new JSONObject();
         List<Integer> week = userService.getWeekNum();
         jsonObject.put("week", week);
-        return jsonObject;
+        return JSON.toJSONString(jsonObject);
+    }
+
+    @GetMapping(value = "/zengZhangLine")
+    public String zengZhangLine()
+    {
+        return "echarts/zengzhangchart";
     }
 }
