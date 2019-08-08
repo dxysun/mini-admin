@@ -70,7 +70,8 @@
 						<!--<td>-->
 							<!--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
 						<!--</td>-->
-						<th scope="row" th:text="${collect.id}">1</th>
+						<th scope="row" th:text="${iterStat.count}+${userList.prePage}*20">1</th>
+						<!--<th scope="row" th:text="${collect.id}">1</th>-->
 						<td th:text="${collect.nickName}">Mark</td>
 						<td th:if="${collect.gender} eq 1 " >男</td>
 						<td th:if="${collect.gender} eq 0 " >女</td>

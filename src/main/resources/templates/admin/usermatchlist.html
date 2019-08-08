@@ -62,7 +62,7 @@
         <tr>
 
         <tr  th:each="collect,iterStat : ${matchList}">
-            <th scope="row" th:text="${collect.id}">1</th>
+            <th scope="row" th:text="${iterStat.count}+${currentPage}*20-20">1</th>
             <td th:text="${collect.openId}">Mark</td>
             <td th:text="${collect.nickName}">Mark</td>
             <td th:text="${collect.dynamicCount}">Mark</td>

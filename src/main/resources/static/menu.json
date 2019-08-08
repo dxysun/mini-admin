@@ -32,25 +32,25 @@
           "id": 4,
           "name": "男生个人标签",
           "icon": "",
-          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=10&type=1"
+          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=20&type=1"
         },
         {
           "id": 5,
           "name": "女生个人标签",
           "icon": "",
-          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=10&type=3"
+          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=20&type=3"
         },
         {
           "id": 6,
           "name": "男生对女生要求标签",
           "icon": "",
-          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=10&type=0"
+          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=20&type=0"
         },
         {
           "id": 7,
           "name": "女生对男生要求标签",
           "icon": "",
-          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=10&type=2"
+          "url": "/miniloveadmin/admin/tag/getTagsByType?pageNo=1&pageSize=20&type=2"
         }
       ]
     },
@@ -120,7 +120,7 @@
           "id": 29,
           "name": "所有反馈",
           "icon": "",
-          "url": "/miniloveadmin/admin/userFeedback/getPageQueryInfo?pageNo=1&pageSize=10"
+          "url": "/miniloveadmin/admin/userFeedback/getPageQueryInfo?pageNo=1&pageSize=20"
         }
       ]
     }
