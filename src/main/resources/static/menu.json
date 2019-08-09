@@ -107,6 +107,12 @@
           "name": "增长曲线图",
           "icon": "",
           "url": "/miniloveadmin/admin/user/zengZhangLine"
+        },
+        {
+          "id": 27,
+          "name": "中国地图",
+          "icon": "",
+          "url": "/miniloveadmin/admin/user/getCityUser"
         }
       ]
     },
