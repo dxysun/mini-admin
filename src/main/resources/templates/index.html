@@ -12,6 +12,9 @@
 	<link rel="stylesheet" th:href="@{/static/css/font.css}"/>
 	<link rel="stylesheet" th:href="@{/static/css/weadmin.css}"/>
 	<script type="text/javascript" th:src="@{/static/layui/layui.js}" charset="utf-8"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <!--	<script type="text/javascript" th:src="@{/static/js/admin.js}" charset="utf-8"></script>-->
 
 </head>
@@ -53,21 +56,33 @@
 <div class="page-content">
 	<div class="layui-tab tab" lay-filter="wenav_tab" id="WeTabTip" lay-allowclose="true">
 		<ul class="layui-tab-title" id="tabName">
-			<li>我的桌面</li>
+			<li>主页面</li>
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-tab-item layui-show">
-				<iframe th:src='@{/admin/user/wel}' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+				<!--<iframe th:src='@{/admin/user/wel}' frameborder="0" scrolling="yes" class="weIframe"></iframe>-->
+				<div id="main" style="width: 100%;height:400px;"></div>
 			</div>
 		</div>
+		<!--<div class="weadmin-body">
+			<blockquote class="layui-elem-quote">
+				欢迎使用莫比恋爱后台管理系统
+			</blockquote>
+			&lt;!&ndash; 为 ECharts 准备一个具备大小（宽高）的 DOM &ndash;&gt;
+			<div id="main" style="width: 100%;height:400px;"></div>
+			&lt;!&ndash;<blockquote class="layui-elem-quote">&ndash;&gt;
+			&lt;!&ndash;&lt;!&ndash;注意：本案例的Echarts图表库由cdn引入，需要在线才能正常使用，若要离线使用，请至Echarts官网下载。&ndash;&gt;&ndash;&gt;
+			&lt;!&ndash;</blockquote>&ndash;&gt;
+		</div>-->
 	</div>
 </div>
+
 <div class="page-content-bg"></div>
 <!-- 右侧主体结束 -->
 <!-- 中部结束 -->
 <!-- 底部开始 -->
 <div class="footer">
-	<div class="copyright">Copyright ©2018 WeAdmin v1.0 All Rights Reserved</div>
+	<div class="copyright">Copyright ©2019 WeAdmin v1.0 All Rights Reserved</div>
 </div>
 <!-- 底部结束 -->
 <script type="text/javascript">
@@ -91,6 +106,88 @@
 
 </script>
 </body>
+
+<script type="text/javascript">
+	var result ;
+	$(document).ready(function(){
+		$.post("/miniloveadmin/admin/user/getProvinceUserNum",function(data,status){
+
+			result = $.parseJSON(data);
+			console.log(result);
+			var option = {
+				backgroundColor: '#FFFFFF',
+				title: {
+					text: '全国地图大数据',
+					subtext: '',
+					x:'center'
+				},
+				tooltip : {
+					trigger: 'item'
+				},
+
+				//左侧小导航图标
+				visualMap: {
+					min: 0,
+					max: 2500,
+					left: 'left',
+					top: 'bottom',
+					text:['高','低'],           // 文本，默认为数值文本
+					calculable : true
+				},
+				toolbox: {
+					show: true,
+					orient : 'vertical',
+					left: 'right',
+					top: 'center',
+					feature : {
+						mark : {show: true},
+						dataView : {show: true, readOnly: false},
+						restore : {show: true},
+						saveAsImage : {show: true}
+					}
+				},
+				//配置属性
+				series : [
+					{
+						name: '人数统计',
+						type: 'map',
+						mapType: 'china',
+						roam: false,
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: true
+							}
+						},
+						data:result
+					},]
+			};
+			//初始化echarts实例
+			var myChart = echarts.init(document.getElementById('main'));
+			myChart.setOption(option);
+			//console.log(result.length);
+		})
+	});
+	// for(i in result)
+	// {
+	//     console.log(i['field']);
+	// }
+
+	// 基于准备好的dom，初始化echarts实例
+	// var myChart = echarts.init(document.getElementById('main'));
+	//
+	// // 指定图表的配置项和数据
+	// var data = genData();
+
+
+
+	function genData() {
+		return result;
+	}
+	// 使用刚指定的配置项和数据显示图表。
+</script>
 <!--Tab菜单右键弹出菜单-->
 <ul class="rightMenu" id="rightMenu">
 	<li data-type="fresh">刷新</li>
