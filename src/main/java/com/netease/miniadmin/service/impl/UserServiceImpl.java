@@ -311,7 +311,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<UserStatistics> selectUserNumByCity() {
-        return userMapper.selectUserNumByCity();
+    public List<UserStatistics> selectUserNumByProvince() {
+        return userMapper.selectUserNumByProvince();
     }
 }

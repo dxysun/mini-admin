@@ -96,7 +96,7 @@ public interface UserMapper {
 
     int selectWeekNum(String mydate);
 
-    List<UserStatistics> selectUserNumByCity();
+    List<UserStatistics> selectUserNumByProvince();
 
 
 }

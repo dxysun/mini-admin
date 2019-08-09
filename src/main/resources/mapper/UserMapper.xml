@@ -443,9 +443,9 @@
     <delete id="deleteUserById" parameterType="Integer">
     delete from user where id = #{id}
     </delete>
-    <select id="selectUserNumByCity" resultType="com.netease.miniadmin.model.UserStatistics">
+    <select id="selectUserNumByProvince" resultType="com.netease.miniadmin.model.UserStatistics">
         select
-        city as name,count(id) as value from  user
-        group by city
+        province as name,count(id) as value from  user
+        group by province
     </select>
 </mapper>

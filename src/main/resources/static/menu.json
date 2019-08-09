@@ -112,7 +112,7 @@
           "id": 27,
           "name": "中国地图",
           "icon": "",
-          "url": "/miniloveadmin/admin/user/getCityUser"
+          "url": "/miniloveadmin/admin/user/getProvinceUser"
         }
       ]
     },

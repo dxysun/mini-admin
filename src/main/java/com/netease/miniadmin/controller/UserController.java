@@ -316,12 +316,12 @@ public class UserController {
      * @author xiabin
      * @return
      */
-    @GetMapping(value = "/getCityUserNum")
+    @PostMapping(value = "/getProvinceUserNum")
     @ResponseBody
-    public String selectUserNumByCity() {
+    public String selectUserNumByProvince() {
         List<UserStatistics> userStatistics = new ArrayList<>();
         try {
-            userStatistics = userService.selectUserNumByCity();
+            userStatistics = userService.selectUserNumByProvince();
             if (userStatistics == null || userStatistics.size() == 0){
                 AjaxObject.error("获取城市用户数失败");
             }
@@ -334,8 +334,8 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/getCityUser")
-    public String getCityUser()
+    @GetMapping(value = "/getProvinceUser")
+    public String getProvinceUser()
     {
         return "echarts/mapecharts";
     }

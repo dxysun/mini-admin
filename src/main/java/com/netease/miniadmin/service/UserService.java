@@ -42,5 +42,5 @@ public interface UserService {
 
     List<Integer> getWeekNum();
 
-    List<UserStatistics> selectUserNumByCity();
+    List<UserStatistics> selectUserNumByProvince();
 }
