@@ -11,14 +11,26 @@
     <link rel="stylesheet" th:href="@{/static/css/weadmin.css}"/>
 
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/lodash.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/dat.gui.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=kgfYoSzk5XRb5GSgQaNULowOatsfHafd"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/ace.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/ext-language_tools.js"></script>-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="https://www.echartsjs.com/gallery/javascripts/editor.js"></script>&ndash;&gt;-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/javascripts/hm.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=2.0&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/?qt=verify&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="https://hm.baidu.com/hm.js?4bad1df23f079e0d12bdbef5e65b072f"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/mode-javascript.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/snippets/text.js"></script>-->
+
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <!--        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
@@ -41,30 +53,26 @@
 
 
 </body>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-</script>
-<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
 <script type="text/javascript">
     var result ;
     $(document).ready(function(){
         $.post("/miniloveadmin/admin/user/getagedata",function(data,status){
-            //result =data;
+
             result = $.parseJSON(data);
             console.log(result);
-            option = {
-                title : {
-                    text: 'iphone销量',
-                    subtext: '纯属虚构',
-                    left: 'center'
+            var option = {
+                backgroundColor: '#FFFFFF',
+                title: {
+                    text: '全国地图大数据',
+                    subtext: '',
+                    x:'center'
                 },
                 tooltip : {
                     trigger: 'item'
                 },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data:['iphone3','iphone4','iphone5']
-                },
+
+                //左侧小导航图标
                 visualMap: {
                     min: 0,
                     max: 2500,
@@ -85,9 +93,10 @@
                         saveAsImage : {show: true}
                     }
                 },
+                //配置属性
                 series : [
                     {
-                        name: 'iphone3',
+                        name: '人数统计',
                         type: 'map',
                         mapType: 'china',
                         roam: false,
@@ -135,67 +144,12 @@
                             {name: '香港',value: Math.round(Math.random()*1000)},
                             {name: '澳门',value: Math.round(Math.random()*1000)}
                         ]
-                    },
-                    {
-                        name: 'iphone4',
-                        type: 'map',
-                        mapType: 'china',
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: true
-                            }
-                        },
-                        data:[
-                            {name: '北京',value: Math.round(Math.random()*1000)},
-                            {name: '天津',value: Math.round(Math.random()*1000)},
-                            {name: '上海',value: Math.round(Math.random()*1000)},
-                            {name: '重庆',value: Math.round(Math.random()*1000)},
-                            {name: '河北',value: Math.round(Math.random()*1000)},
-                            {name: '安徽',value: Math.round(Math.random()*1000)},
-                            {name: '新疆',value: Math.round(Math.random()*1000)},
-                            {name: '浙江',value: Math.round(Math.random()*1000)},
-                            {name: '江西',value: Math.round(Math.random()*1000)},
-                            {name: '山西',value: Math.round(Math.random()*1000)},
-                            {name: '内蒙古',value: Math.round(Math.random()*1000)},
-                            {name: '吉林',value: Math.round(Math.random()*1000)},
-                            {name: '福建',value: Math.round(Math.random()*1000)},
-                            {name: '广东',value: Math.round(Math.random()*1000)},
-                            {name: '西藏',value: Math.round(Math.random()*1000)},
-                            {name: '四川',value: Math.round(Math.random()*1000)},
-                            {name: '宁夏',value: Math.round(Math.random()*1000)},
-                            {name: '香港',value: Math.round(Math.random()*1000)},
-                            {name: '澳门',value: Math.round(Math.random()*1000)}
-                        ]
-                    },
-                    {
-                        name: 'iphone5',
-                        type: 'map',
-                        mapType: 'china',
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: true
-                            }
-                        },
-                        data:[
-                            {name: '北京',value: Math.round(Math.random()*1000)},
-                            {name: '天津',value: Math.round(Math.random()*1000)},
-                            {name: '上海',value: Math.round(Math.random()*1000)},
-                            {name: '广东',value: Math.round(Math.random()*1000)},
-                            {name: '台湾',value: Math.round(Math.random()*1000)},
-                            {name: '香港',value: Math.round(Math.random()*1000)},
-                            {name: '澳门',value: Math.round(Math.random()*1000)}
-                        ]
-                    }
-                ]
+                    },]
             };
+            //初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
             myChart.setOption(option);
-            console.log(result.length);
+            //console.log(result.length);
         })
     });
     // for(i in result)
@@ -204,10 +158,10 @@
     // }
 
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    var data = genData();
+    // var myChart = echarts.init(document.getElementById('main'));
+    //
+    // // 指定图表的配置项和数据
+    // var data = genData();
 
 
 
