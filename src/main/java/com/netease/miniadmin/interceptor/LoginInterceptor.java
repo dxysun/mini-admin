@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
-    /*@Override
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SuperAdmin superAdmin = (SuperAdmin) request.getSession().getAttribute("admin");
         if (superAdmin == null) {
@@ -16,5 +16,5 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         return true;
-    }*/
+    }
 }
