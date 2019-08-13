@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,11 +64,13 @@ import java.util.List;
             }
             List<String> nickNameList = userMapper.selectNickNameByOpenId(openIdList);
             List<EchartResultDto> echartResultList = new ArrayList<>();
-            for(int i = 0; i < length; i++){
-                if(nickNameList.get(i) != null) {
-                    echartResultList.add(new EchartResultDto(nickNameList.get(i), list.get(i).getNum()));
-                }else{
-                    echartResultList.add(new EchartResultDto(Constant.DynamicDistribute.DEFAULTNICKNAME, list.get(i).getNum()));
+            if(!CollectionUtils.isEmpty(nickNameList)) {
+                for (int i = 0; i < length; i++) {
+                    if (nickNameList.get(i) != null) {
+                        echartResultList.add(new EchartResultDto(nickNameList.get(i), list.get(i).getNum()));
+                    } else {
+                        echartResultList.add(new EchartResultDto(Constant.DynamicDistribute.DEFAULTNICKNAME, list.get(i).getNum()));
+                    }
                 }
             }
             return echartResultList;
