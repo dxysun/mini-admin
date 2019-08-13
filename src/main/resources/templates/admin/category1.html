@@ -70,7 +70,7 @@
             <!--<td>-->
             <!--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
             <!--</td>-->
-            <th scope="row" th:text="${collect.id}">1</th>
+            <th scope="row" th:text="${iterStat.count}+${tags.prePage}*20">1</th>
             <td th:text="${collect.tagName}">Mark</td>
             <td th:if="${collect.tagClassify} eq 0 ">外在</td>
             <td th:if="${collect.tagClassify} eq 1 ">内在</td>
@@ -98,12 +98,12 @@
     </table>
     <div class="page">
         <div>
-            <a class="prev" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.prePage}+'&pageSize=10&type=1'}">&lt;&lt;</a>
-            <a class="num" th:href="@{'/admin/tag/getTagsByType?pageNo=1&pageSize=10&type=1'}">1</a>
+            <a class="prev" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.prePage}+'&pageSize=20&type=1'}">&lt;&lt;</a>
+            <a class="num" th:href="@{'/admin/tag/getTagsByType?pageNo=1&pageSize=20&type=1'}">1</a>
             <span class="current"><span th:text="${tags.prePage+1}"></span></span>
-            <a class="num" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.pages}+'&pageSize=10&type=1'}"
+            <a class="num" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.pages}+'&pageSize=20&type=1'}"
                th:text="${tags.pages}"></a>
-            <a class="next" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.nextPage}+'&pageSize=10&type=1'}">&gt;&gt;</a>
+            <a class="next" th:href="@{'/admin/tag/getTagsByType?pageNo='+${tags.nextPage}+'&pageSize=20&type=1'}">&gt;&gt;</a>
         </div>
     </div>
 </div>

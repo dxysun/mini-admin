@@ -11,6 +11,7 @@ import com.netease.miniadmin.dto.MatchResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.mapper.UserMapper;
 import com.netease.miniadmin.model.User;
+import com.netease.miniadmin.model.UserStatistics;
 import com.netease.miniadmin.model.param.MatchingResult;
 import com.netease.miniadmin.service.DynamicService;
 import com.netease.miniadmin.service.UserService;
@@ -19,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -285,5 +288,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUser(Integer id) {
         return userMapper.deleteUserById(id);
+    }
+
+    @Override
+    public List<Integer> getWeekNum(){
+        List<Integer> res =new ArrayList<>();
+        for(int i=6; i>=0; i--)
+        {
+            Date date =new Date(System.currentTimeMillis()-1000*60*60*24*i);
+            SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = dateFormat.format(date.getTime());
+            System.out.println(time);
+            Integer number = userMapper.selectWeekNum(time);
+            System.out.println("number = "+number);
+            res.add(number);
+        }
+        return res;
+    }
+
+    /**
+     * 按照地区统计用户数
+     * @return
+     */
+    @Override
+    public List<UserStatistics> selectUserNumByProvince() {
+        return userMapper.selectUserNumByProvince();
     }
 }

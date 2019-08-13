@@ -62,7 +62,7 @@
         <tr>
 
         <tr  th:each="collect,iterStat : ${matchList}">
-            <th scope="row" th:text="${collect.id}">1</th>
+            <th scope="row" th:text="${iterStat.count}+${currentPage}*20-20">1</th>
             <td th:text="${collect.openId}">Mark</td>
             <td th:text="${collect.nickName}">Mark</td>
             <td th:text="${collect.dynamicCount}">Mark</td>
@@ -96,11 +96,11 @@
     </table>
     <div class="page">
         <div>
-            <a class="prev" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${prePage}+'&pageSize=10'}">&lt;&lt;</a>
-            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageIndex=1&pageSize=10'}">1</a>
+            <a class="prev" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${prePage}+'&pageSize=20'}">&lt;&lt;</a>
+            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageIndex=1&pageSize=20'}">1</a>
             <span class="current"><span th:text="${currentPage}"></span></span>
-            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${pages}+'&pageSize=10'}" th:text="${pages}" ></a>
-            <a class="next" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${nextPage}+'&pageSize=10'}">&gt;&gt;</a>
+            <a class="num" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${pages}+'&pageSize=20'}" th:text="${pages}" ></a>
+            <a class="next" th:href="@{'/admin/user/getUserMatchInfo?pageIndex='+${nextPage}+'&pageSize=20'}">&gt;&gt;</a>
         </div>
     </div>
 </div>

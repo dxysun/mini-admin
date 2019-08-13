@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>统计图表-WeAdmin Frame型后台管理系统-WeAdmin 1.0</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" th:href="@{/static/css/font.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/weadmin.css}"/>
+
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/lodash.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/dat.gui.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/ace.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/ext-language_tools.js"></script>-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="https://www.echartsjs.com/gallery/javascripts/editor.js"></script>&ndash;&gt;-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/javascripts/hm.js"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=2.0&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="https://api.map.baidu.com/?qt=verify&ak=k5DG60Ak8lTfzdGXF0Y8qlHGl2RiEnQ5"></script>-->
+<!--    <script type="text/javascript" src="https://hm.baidu.com/hm.js?4bad1df23f079e0d12bdbef5e65b072f"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/mode-javascript.js"></script>-->
+<!--    <script type="text/javascript" src="https://www.echartsjs.com/gallery/vendors/ace/src/snippets/text.js"></script>-->
+
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>-->
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <!--        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>-->
+
+</head>
+<body>
+
+<div class="weadmin-body">
+    <blockquote class="layui-elem-quote">
+        欢迎使用莫比恋爱后台管理系统
+    </blockquote>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 100%;height:400px;"></div>
+    <!--<blockquote class="layui-elem-quote">-->
+    <!--&lt;!&ndash;注意：本案例的Echarts图表库由cdn引入，需要在线才能正常使用，若要离线使用，请至Echarts官网下载。&ndash;&gt;-->
+    <!--</blockquote>-->
+</div>
+
+
+
+
+</body>
+
+<script type="text/javascript">
+    var result ;
+    $(document).ready(function(){
+        $.post("/miniloveadmin/admin/user/getProvinceUserNum",function(data,status){
+
+            result = $.parseJSON(data);
+            console.log(result);
+            var option = {
+                backgroundColor: '#FFFFFF',
+                title: {
+                    text: '全国地图大数据',
+                    subtext: '',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item'
+                },
+
+                //左侧小导航图标
+                visualMap: {
+                    min: 0,
+                    max: 2500,
+                    left: 'left',
+                    top: 'bottom',
+                    text:['高','低'],           // 文本，默认为数值文本
+                    calculable : true
+                },
+                toolbox: {
+                    show: true,
+                    orient : 'vertical',
+                    left: 'right',
+                    top: 'center',
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                //配置属性
+                series : [
+                    {
+                        name: '人数统计',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:result
+                    },]
+            };
+            //初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+            //console.log(result.length);
+        })
+    });
+    // for(i in result)
+    // {
+    //     console.log(i['field']);
+    // }
+
+    // 基于准备好的dom，初始化echarts实例
+    // var myChart = echarts.init(document.getElementById('main'));
+    //
+    // // 指定图表的配置项和数据
+    // var data = genData();
+
+
+
+    function genData() {
+        return result;
+    }
+    // 使用刚指定的配置项和数据显示图表。
+</script>
+
+</html>

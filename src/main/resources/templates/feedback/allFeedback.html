@@ -65,7 +65,7 @@
             <!--<td>-->
                 <!--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
             <!--</td>-->
-            <th scope="row" th:text="${collect.id}">1</th>
+            <th scope="row" th:text="${iterStat.count}+${feedbackLists.prePage}*20">1</th>
             <td th:text="${collect.openId}"></td>
             <td th:text="${collect.content}"></td>
             <td th:text="${#dates.format(collect.createTime, 'yyyy-MM-dd')}"></td>
@@ -85,11 +85,11 @@
     </table>
     <div class="page">
         <div>
-            <a class="prev" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.prePage}+'&pageSize=10'}">&lt;&lt;</a>
-            <a class="num" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo=1&pageSize=10'}">1</a>
+            <a class="prev" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.prePage}+'&pageSize=20'}">&lt;&lt;</a>
+            <a class="num" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo=1&pageSize=20'}">1</a>
             <span class="current"><span th:text="${feedbackLists.prePage+1}"></span></span>
-            <a class="num" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.pages}+'&pageSize=10'}" th:text="${feedbackLists.pages}" ></a>
-            <a class="next" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.nextPage}+'&pageSize=10'}">&gt;&gt;</a>
+            <a class="num" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.pages}+'&pageSize=20'}" th:text="${feedbackLists.pages}" ></a>
+            <a class="next" th:href="@{'/admin/userFeedback/getPageQueryInfo?pageNo='+${feedbackLists.nextPage}+'&pageSize=20'}">&gt;&gt;</a>
         </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.model.User;
 import com.netease.miniadmin.model.UserKey;
+import com.netease.miniadmin.model.UserStatistics;
 import com.netease.miniadmin.model.UserWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -92,6 +93,10 @@ public interface UserMapper {
 
     List<User> selectAllUserInfo(@Param("rowIndex") int rowIndex,
                                  @Param("pageSize") int pageSize);
+
+    int selectWeekNum(String mydate);
+
+    List<UserStatistics> selectUserNumByProvince();
 
 
 }

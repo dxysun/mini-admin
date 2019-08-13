@@ -1,10 +1,12 @@
 package com.netease.miniadmin.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.netease.miniadmin.dto.CountResultDto;
 import com.netease.miniadmin.dto.MatchResultDto;
 import com.netease.miniadmin.dto.UserMatchDto;
 import com.netease.miniadmin.model.User;
+import com.netease.miniadmin.model.UserStatistics;
 
 import java.util.List;
 
@@ -38,5 +40,7 @@ public interface UserService {
 
     int deleteUser(Integer id);
 
+    List<Integer> getWeekNum();
 
+    List<UserStatistics> selectUserNumByProvince();
 }
