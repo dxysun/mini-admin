@@ -32,7 +32,7 @@ public class GlobalExceptionConfig {
     @Value("${spring.profiles.active}")
     private String springProfilesActive;
 
-    private String[] email = {"310433562@qq.com"};
+    private String[] email = {"1065707370@qq.com"};
 
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionConfig.class);
 
